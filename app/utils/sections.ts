@@ -196,8 +196,14 @@ export const sections: NavSection[] = [
       "Common failure modes and how to fix them: context issues, hooks that don't fire, MCP connection errors, runaway tokens, rate limits, and auth problems.",
     estReadTime: "10 min",
     children: [
-      { title: "Claude Can't See My File", path: "/troubleshooting#missing-file" },
-      { title: "Out of Context Errors", path: "/troubleshooting#out-of-context" },
+      {
+        title: "Claude Can't See My File",
+        path: "/troubleshooting#missing-file",
+      },
+      {
+        title: "Out of Context Errors",
+        path: "/troubleshooting#out-of-context",
+      },
       { title: "Hook Didn't Fire", path: "/troubleshooting#hook" },
       { title: "MCP Won't Connect", path: "/troubleshooting#mcp" },
       { title: "Tokens Exploding", path: "/troubleshooting#tokens" },

@@ -24,7 +24,7 @@ export interface NavSection {
   slug: string;
   title: string;
   path: string;
-  icon: Component;
+  icon: Component | string;
   accent: AccentKey;
   tagline: string;
   description: string;

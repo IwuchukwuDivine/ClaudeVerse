@@ -27,7 +27,7 @@ const buildItems = (): SearchItem[] => {
       subtitle: section.tagline,
       body: `${section.description} ${childTitles}`,
       keywords: [section.slug, section.accent],
-      icon: section.icon,
+      icon: typeof section.icon === "string" ? BookOpen : section.icon,
       accent: section.accent,
       badge: "Section",
       to: section.path,

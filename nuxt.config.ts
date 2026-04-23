@@ -12,11 +12,39 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "@nuxt/content",
   ],
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["@vueuse/core"],
+      include: [
+        "@vueuse/core",
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "@lucide/vue",
+      ],
+    },
+  },
+  content: {
+    build: {
+      markdown: {
+        // Syntax highlighting for code blocks (ProsePre / ProseCode)
+        highlight: {
+          theme: "github-light",
+          langs: [
+            "bash",
+            "shell",
+            "json",
+            "yaml",
+            "markdown",
+            "javascript",
+            "typescript",
+            "vue",
+            "html",
+            "css",
+          ],
+        },
+      },
     },
   },
   typescript: {
@@ -191,7 +219,7 @@ export default defineNuxtConfig({
       { name: "Fredoka", src: "~/assets/fonts/Fredoka-Bold.ttf", weight: 700 },
     ],
   },
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/main.css", "~/assets/css/prose.css"],
   components: true,
   ssr: true,
   devServer: {

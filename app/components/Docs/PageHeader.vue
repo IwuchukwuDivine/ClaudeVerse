@@ -30,7 +30,7 @@ withDefaults(
     title: string;
     description?: string;
     eyebrow?: string;
-    icon?: Component;
+    icon?: Component | string;
     accent?: AccentKey;
     estReadTime?: string;
   }>(),
