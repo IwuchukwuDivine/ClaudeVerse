@@ -26,7 +26,7 @@
                 @keydown.up.prevent="moveActive(-1)"
                 @keydown.enter.prevent="activate"
                 @keydown.esc.prevent="close"
-              />
+              >
               <span v-if="loading" class="search-dialog__spinner" aria-hidden="true" />
               <kbd class="search-dialog__esc">Esc</kbd>
             </div>
