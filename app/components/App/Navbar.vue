@@ -23,18 +23,26 @@
         >
       </div>
 
-      <div class="navbar__search">
+      <button
+        type="button"
+        class="navbar__search"
+        aria-label="Open search"
+        @click="openSearch"
+      >
         <LucideSearch :size="16" class="navbar__search-icon" />
-        <input
-          type="search"
-          placeholder="Search guide…"
-          class="navbar__search-input"
-          aria-label="Search"
-        />
-        <kbd class="navbar__kbd">⌘K</kbd>
-      </div>
+        <span class="navbar__search-label">Search guide…</span>
+        <kbd class="navbar__kbd">{{ shortcutHint }}</kbd>
+      </button>
 
       <div class="navbar__right">
+        <button
+          type="button"
+          class="navbar__icon-btn navbar__search-trigger"
+          aria-label="Search"
+          @click="openSearch"
+        >
+          <LucideSearch :size="20" />
+        </button>
         <a
           href="https://docs.claude.com"
           target="_blank"
@@ -61,6 +69,49 @@
 
 <script setup lang="ts">
 defineEmits<{ toggleSidebar: [] }>();
+
+const { open, toggle } = useSearch();
+
+const isMac = ref(false);
+const shortcutHint = computed(() => (isMac.value ? "⌘K" : "Ctrl K"));
+
+const openSearch = () => {
+  open();
+};
+
+const onKeydown = (e: KeyboardEvent) => {
+  const key = e.key?.toLowerCase();
+  if ((e.metaKey || e.ctrlKey) && key === "k") {
+    e.preventDefault();
+    toggle();
+  } else if (key === "/" && !isEditable(e.target)) {
+    e.preventDefault();
+    open();
+  }
+};
+
+const isEditable = (target: EventTarget | null): boolean => {
+  if (!(target instanceof HTMLElement)) return false;
+  const tag = target.tagName;
+  return (
+    tag === "INPUT" ||
+    tag === "TEXTAREA" ||
+    target.isContentEditable === true
+  );
+};
+
+onMounted(() => {
+  if (import.meta.client) {
+    isMac.value = /Mac|iPhone|iPad|iPod/i.test(navigator.platform);
+    window.addEventListener("keydown", onKeydown);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (import.meta.client) {
+    window.removeEventListener("keydown", onKeydown);
+  }
+});
 </script>
 
 <style scoped>
@@ -148,31 +199,52 @@ defineEmits<{ toggleSidebar: [] }>();
   gap: 0.5rem;
   padding: 0 0.75rem;
   height: 2.25rem;
+  width: 100%;
   background: var(--surface-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--text-muted);
-  transition: border-color 160ms ease;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: border-color 160ms ease, background 160ms ease;
 }
-.navbar__search:focus-within {
+.navbar__search:hover {
+  border-color: var(--border-strong, var(--border));
+  background: color-mix(in oklab, var(--surface-elevated) 80%, var(--surface));
+}
+.navbar__search:focus-visible {
+  outline: none;
   border-color: var(--primary);
   box-shadow: var(--shadow-glow);
 }
 .navbar__search-icon {
   flex-shrink: 0;
 }
-.navbar__search-input {
+.navbar__search-label {
   flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
   font-size: 0.875rem;
-  font-family: var(--font-body);
-  color: var(--text-primary);
-  min-width: 0;
-}
-.navbar__search-input::placeholder {
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.navbar__icon-btn {
+  display: none;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.navbar__icon-btn:hover {
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border);
 }
 .navbar__kbd {
   font-family: var(--font-mono);
@@ -217,36 +289,61 @@ defineEmits<{ toggleSidebar: [] }>();
   }
 }
 @media (max-width: 768px) {
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
   .navbar__inner {
-    grid-template-columns: auto 1fr auto;
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 0.875rem;
   }
+  .navbar__left {
+    flex: 1;
+    min-width: 0;
+  }
   .navbar__menu {
     display: inline-flex;
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2.75rem;
+    width: 2.75rem;
   }
   .navbar__search {
     display: none;
   }
+  .navbar__search-trigger {
+    display: inline-flex;
+    height: 2.75rem;
+    width: 2.75rem;
+  }
   .navbar__right {
-    gap: 0.125rem;
-    justify-self: end;
+    margin-left: auto;
+    gap: 0;
   }
   .navbar__link {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2.75rem;
+    width: 2.75rem;
     padding: 0;
     justify-content: center;
     gap: 0;
+  }
+  .navbar__link :deep(svg) {
+    width: 22px;
+    height: 22px;
   }
   .navbar__link span {
     display: none;
   }
   .navbar__right :deep(.theme-toggle) {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2.75rem;
+    width: 2.75rem;
+  }
+  .navbar__right :deep(.theme-toggle svg) {
+    width: 22px;
+    height: 22px;
   }
 }
 </style>

@@ -22,6 +22,8 @@
 
       <AppToc />
     </div>
+
+    <AppSearchDialog />
   </div>
 </template>
 
@@ -79,6 +81,14 @@ watch(
   }
   .shell__scrim {
     display: block;
+  }
+}
+@media (max-width: 768px) {
+  .shell {
+    padding-top: 4rem;
+  }
+  .shell__scrim {
+    inset: 4rem 0 0 0;
   }
 }
 </style>

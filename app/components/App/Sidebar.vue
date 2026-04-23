@@ -312,4 +312,9 @@ const isActiveAnchor = (path: string) => {
     transform: translateX(0);
   }
 }
+@media (max-width: 768px) {
+  .sidebar {
+    inset: 4rem 0 0 0;
+  }
+}
 </style>
