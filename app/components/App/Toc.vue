@@ -31,7 +31,7 @@
         rel="noopener"
         class="toc__action"
       >
-        <IconGithub :size="13" />
+        <LazyIconGithub :size="13" />
         <span>Edit on GitHub</span>
       </a>
     </div>
