@@ -1,55 +1,51 @@
 <template>
   <article>
     <DocsPageHeader
-      title="Orchestration"
-      eyebrow="Scale beyond one session"
-      accent="orchestration"
-      :icon="Network"
-      description="Multi-agent patterns, the 3-tier orchestrator landscape, Agent Teams, git worktrees, AGENTS.md, and quality gates."
-      est-read-time="25 min"
+      title="Troubleshooting"
+      eyebrow="When things break"
+      accent="troubleshooting"
+      :icon="LifeBuoy"
+      description="Common Claude Code failure modes and how to fix them: context issues, hooks that don't fire, MCP connection errors, runaway tokens, rate limits, and auth problems."
+      est-read-time="10 min"
     />
     <DocsComingSoon
       :topics="[
-        'When to scale beyond a single session',
-        'The 3 tiers of orchestration',
-        'Subagents → Agent Teams graduation path',
-        'Git worktrees for isolation',
-        'Conductor model vs orchestrator model',
-        'Agent Teams deep dive',
-        'Quality gates',
-        'AGENTS.md for compound learning',
-        'Token economics comparison',
-        'External orchestrator comparison',
+        `Claude can't see my file`,
+        'Out-of-context errors',
+        `Hook didn't fire`,
+        `MCP won't connect`,
+        'Tokens exploding',
+        'Rate limit errors',
+        'Auth & login issues',
       ]"
     />
     <DocsPageNav
-      :prev="{ title: 'Token Mastery', path: '/tokens' }"
-      :next="{ title: 'Evals', path: '/evals' }"
+      :prev="{ title: 'Recipes', path: '/recipes' }"
+      :next="{ title: 'Resources', path: '/resources' }"
     />
   </article>
 </template>
 
 <script setup lang="ts">
-import { Network } from "@lucide/vue";
+import { LifeBuoy } from "@lucide/vue";
 
-const seoTitle = "Orchestration — Multi-Agent Claude Code at Scale";
+const seoTitle = "Troubleshooting — Fixing Claude Code When It Breaks";
 const seoDescription =
-  "When to scale up from a single session: the 3-tier orchestrator landscape, subagents graduating to Agent Teams, git worktrees, conductor vs orchestrator models, AGENTS.md, quality gates, token economics, and external orchestrators compared.";
+  "A field guide to Claude Code's most common failure modes: missing context, broken hooks, MCP connection errors, token blow-ups, rate limits, and login issues — with fixes.";
 
 const { url, image } = useSeo({
   title: seoTitle,
   description: seoDescription,
-  path: "/orchestration",
+  path: "/troubleshooting",
   type: "article",
   keywords: [
-    "multi-agent orchestration",
-    "claude code subagents",
-    "agent teams",
-    "git worktrees",
-    "agents md",
-    "conductor orchestrator",
-    "quality gates",
-    "parallel agents",
+    "claude code troubleshooting",
+    "claude code errors",
+    "mcp connection error",
+    "claude code context issues",
+    "claude code rate limits",
+    "fix claude code hooks",
+    "ai agent debugging",
   ],
 });
 
@@ -77,8 +73,13 @@ useHead({
               },
             },
             mainEntityOfPage: url,
-            proficiencyLevel: "Advanced",
-            timeRequired: "PT25M",
+            timeRequired: "PT10M",
+            about: [
+              "Claude Code troubleshooting",
+              "MCP errors",
+              "Agent debugging",
+              "Rate limits",
+            ],
           },
           {
             "@type": "BreadcrumbList",
@@ -92,7 +93,7 @@ useHead({
               {
                 "@type": "ListItem",
                 position: 2,
-                name: "Orchestration",
+                name: "Troubleshooting",
                 item: url,
               },
             ],

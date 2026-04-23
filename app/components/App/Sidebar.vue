@@ -220,6 +220,18 @@ const isActiveAnchor = (path: string) => {
   background: var(--accent-orchestration-wash);
   color: var(--accent-orchestration);
 }
+.sidebar__section--evals .sidebar__icon {
+  background: var(--accent-evals-wash);
+  color: var(--accent-evals);
+}
+.sidebar__section--recipes .sidebar__icon {
+  background: var(--accent-recipes-wash);
+  color: var(--accent-recipes);
+}
+.sidebar__section--troubleshooting .sidebar__icon {
+  background: var(--accent-troubleshooting-wash);
+  color: var(--accent-troubleshooting);
+}
 .sidebar__section--resources .sidebar__icon {
   background: var(--accent-resources-wash);
   color: var(--accent-resources);

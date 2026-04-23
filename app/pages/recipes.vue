@@ -1,55 +1,50 @@
 <template>
   <article>
     <DocsPageHeader
-      title="Orchestration"
-      eyebrow="Scale beyond one session"
-      accent="orchestration"
-      :icon="Network"
-      description="Multi-agent patterns, the 3-tier orchestrator landscape, Agent Teams, git worktrees, AGENTS.md, and quality gates."
-      est-read-time="25 min"
+      title="Recipes"
+      eyebrow="Scenario cookbook"
+      accent="recipes"
+      :icon="ChefHat"
+      description="Real-world scenarios solved end-to-end: adding auth, refactoring monoliths, onboarding engineers, migrating codebases, and shipping features in worktrees."
+      est-read-time="30 min"
     />
     <DocsComingSoon
       :topics="[
-        'When to scale beyond a single session',
-        'The 3 tiers of orchestration',
-        'Subagents → Agent Teams graduation path',
-        'Git worktrees for isolation',
-        'Conductor model vs orchestrator model',
-        'Agent Teams deep dive',
-        'Quality gates',
-        'AGENTS.md for compound learning',
-        'Token economics comparison',
-        'External orchestrator comparison',
+        'Add auth to a web app',
+        'Refactor a monolith',
+        'Onboard a new engineer',
+        'Migrate a codebase',
+        'Automate code reviews',
+        'Ship a feature in a worktree',
       ]"
     />
     <DocsPageNav
-      :prev="{ title: 'Token Mastery', path: '/tokens' }"
-      :next="{ title: 'Evals', path: '/evals' }"
+      :prev="{ title: 'Evals', path: '/evals' }"
+      :next="{ title: 'Troubleshooting', path: '/troubleshooting' }"
     />
   </article>
 </template>
 
 <script setup lang="ts">
-import { Network } from "@lucide/vue";
+import { ChefHat } from "@lucide/vue";
 
-const seoTitle = "Orchestration — Multi-Agent Claude Code at Scale";
+const seoTitle = "Recipes — Real-World Claude Code Scenarios";
 const seoDescription =
-  "When to scale up from a single session: the 3-tier orchestrator landscape, subagents graduating to Agent Teams, git worktrees, conductor vs orchestrator models, AGENTS.md, quality gates, token economics, and external orchestrators compared.";
+  "A cookbook of end-to-end Claude Code scenarios: adding authentication, refactoring legacy code, onboarding engineers, migrating codebases, and automating reviews.";
 
 const { url, image } = useSeo({
   title: seoTitle,
   description: seoDescription,
-  path: "/orchestration",
+  path: "/recipes",
   type: "article",
   keywords: [
-    "multi-agent orchestration",
-    "claude code subagents",
-    "agent teams",
-    "git worktrees",
-    "agents md",
-    "conductor orchestrator",
-    "quality gates",
-    "parallel agents",
+    "claude code recipes",
+    "ai coding scenarios",
+    "claude code examples",
+    "refactor with claude",
+    "claude code onboarding",
+    "agent workflows",
+    "ai cookbook",
   ],
 });
 
@@ -77,8 +72,13 @@ useHead({
               },
             },
             mainEntityOfPage: url,
-            proficiencyLevel: "Advanced",
-            timeRequired: "PT25M",
+            timeRequired: "PT30M",
+            about: [
+              "Claude Code scenarios",
+              "AI coding recipes",
+              "Agent workflows",
+              "Refactoring with AI",
+            ],
           },
           {
             "@type": "BreadcrumbList",
@@ -92,7 +92,7 @@ useHead({
               {
                 "@type": "ListItem",
                 position: 2,
-                name: "Orchestration",
+                name: "Recipes",
                 item: url,
               },
             ],

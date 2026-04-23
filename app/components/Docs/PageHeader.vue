@@ -79,6 +79,15 @@ withDefaults(
 .page-header--orchestration {
   --accent: var(--accent-orchestration);
 }
+.page-header--evals {
+  --accent: var(--accent-evals);
+}
+.page-header--recipes {
+  --accent: var(--accent-recipes);
+}
+.page-header--troubleshooting {
+  --accent: var(--accent-troubleshooting);
+}
 .page-header--resources {
   --accent: var(--accent-resources);
 }

@@ -18,7 +18,7 @@
       ]"
     />
     <DocsPageNav
-      :prev="{ title: 'Orchestration', path: '/orchestration' }"
+      :prev="{ title: 'Troubleshooting', path: '/troubleshooting' }"
       :next="{ title: 'Teach It', path: '/teach' }"
     />
   </article>

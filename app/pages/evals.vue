@@ -1,55 +1,51 @@
 <template>
   <article>
     <DocsPageHeader
-      title="Orchestration"
-      eyebrow="Scale beyond one session"
-      accent="orchestration"
-      :icon="Network"
-      description="Multi-agent patterns, the 3-tier orchestrator landscape, Agent Teams, git worktrees, AGENTS.md, and quality gates."
-      est-read-time="25 min"
+      title="Evals"
+      eyebrow="Test your agents"
+      accent="evals"
+      :icon="FlaskConical"
+      description="Why evals matter, golden datasets, LLM-as-judge, regression suites, Anthropic's eval SDK, CI integration, and the real cost of testing agent output."
+      est-read-time="20 min"
     />
     <DocsComingSoon
       :topics="[
-        'When to scale beyond a single session',
-        'The 3 tiers of orchestration',
-        'Subagents → Agent Teams graduation path',
-        'Git worktrees for isolation',
-        'Conductor model vs orchestrator model',
-        'Agent Teams deep dive',
-        'Quality gates',
-        'AGENTS.md for compound learning',
-        'Token economics comparison',
-        'External orchestrator comparison',
+        'Why evals matter',
+        'Golden datasets',
+        'LLM-as-judge',
+        'Regression suites',
+        `Anthropic's eval SDK`,
+        'Running evals in CI',
+        'The cost of evals',
       ]"
     />
     <DocsPageNav
-      :prev="{ title: 'Token Mastery', path: '/tokens' }"
-      :next="{ title: 'Evals', path: '/evals' }"
+      :prev="{ title: 'Orchestration', path: '/orchestration' }"
+      :next="{ title: 'Recipes', path: '/recipes' }"
     />
   </article>
 </template>
 
 <script setup lang="ts">
-import { Network } from "@lucide/vue";
+import { FlaskConical } from "@lucide/vue";
 
-const seoTitle = "Orchestration — Multi-Agent Claude Code at Scale";
+const seoTitle = "Evals — Testing Claude Code Agents";
 const seoDescription =
-  "When to scale up from a single session: the 3-tier orchestrator landscape, subagents graduating to Agent Teams, git worktrees, conductor vs orchestrator models, AGENTS.md, quality gates, token economics, and external orchestrators compared.";
+  "How to build trustworthy Claude Code agents with evaluations: golden datasets, LLM-as-judge scoring, regression suites, CI integration, and the cost of testing.";
 
 const { url, image } = useSeo({
   title: seoTitle,
   description: seoDescription,
-  path: "/orchestration",
+  path: "/evals",
   type: "article",
   keywords: [
-    "multi-agent orchestration",
-    "claude code subagents",
-    "agent teams",
-    "git worktrees",
-    "agents md",
-    "conductor orchestrator",
-    "quality gates",
-    "parallel agents",
+    "claude code evals",
+    "llm evaluations",
+    "llm-as-judge",
+    "golden dataset",
+    "regression testing agents",
+    "anthropic eval sdk",
+    "ai testing",
   ],
 });
 
@@ -77,8 +73,13 @@ useHead({
               },
             },
             mainEntityOfPage: url,
-            proficiencyLevel: "Advanced",
-            timeRequired: "PT25M",
+            timeRequired: "PT20M",
+            about: [
+              "LLM evaluations",
+              "Agent testing",
+              "LLM-as-judge",
+              "CI/CD for AI",
+            ],
           },
           {
             "@type": "BreadcrumbList",
@@ -92,7 +93,7 @@ useHead({
               {
                 "@type": "ListItem",
                 position: 2,
-                name: "Orchestration",
+                name: "Evals",
                 item: url,
               },
             ],

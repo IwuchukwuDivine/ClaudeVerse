@@ -112,6 +112,15 @@ defineProps<{ section: NavSection }>();
 .card--orchestration {
   --accent: var(--accent-orchestration);
 }
+.card--evals {
+  --accent: var(--accent-evals);
+}
+.card--recipes {
+  --accent: var(--accent-recipes);
+}
+.card--troubleshooting {
+  --accent: var(--accent-troubleshooting);
+}
 .card--resources {
   --accent: var(--accent-resources);
 }

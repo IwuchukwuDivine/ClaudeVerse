@@ -31,6 +31,9 @@
   --accent-extensions: #2563eb;
   --accent-tokens: #ca8a04;
   --accent-orchestration: #db2777;
+  --accent-evals: #059669;
+  --accent-recipes: #c026d3;
+  --accent-troubleshooting: #e11d48;
   --accent-resources: #65a30d;
   --accent-teach: #dc2626;
   --accent-cheatsheet: #0891b2;
@@ -41,6 +44,9 @@
   --accent-extensions-wash: #dce7fc;
   --accent-tokens-wash: #f8ecc4;
   --accent-orchestration-wash: #fbdcec;
+  --accent-evals-wash: #d1fae5;
+  --accent-recipes-wash: #fae8ff;
+  --accent-troubleshooting-wash: #ffe4e6;
   --accent-resources-wash: #e6f3d0;
   --accent-teach-wash: #fbd9d9;
   --accent-cheatsheet-wash: #ccebf3;
@@ -109,6 +115,9 @@
   --accent-extensions: #60a5fa;
   --accent-tokens: #fcd34d;
   --accent-orchestration: #f472b6;
+  --accent-evals: #34d399;
+  --accent-recipes: #e879f9;
+  --accent-troubleshooting: #fb7185;
   --accent-resources: #a3e635;
   --accent-teach: #f87171;
   --accent-cheatsheet: #22d3ee;
@@ -119,6 +128,9 @@
   --accent-extensions-wash: #152342;
   --accent-tokens-wash: #2e2511;
   --accent-orchestration-wash: #321428;
+  --accent-evals-wash: #0c2e26;
+  --accent-recipes-wash: #2e0f35;
+  --accent-troubleshooting-wash: #2e0f18;
   --accent-resources-wash: #1e2a0e;
   --accent-teach-wash: #2e1313;
   --accent-cheatsheet-wash: #0c2a33;
@@ -174,6 +186,9 @@
   --color-extensions: var(--accent-extensions);
   --color-tokens: var(--accent-tokens);
   --color-orchestration: var(--accent-orchestration);
+  --color-evals: var(--accent-evals);
+  --color-recipes: var(--accent-recipes);
+  --color-troubleshooting: var(--accent-troubleshooting);
   --color-resources: var(--accent-resources);
   --color-teach: var(--accent-teach);
   --color-cheatsheet: var(--accent-cheatsheet);
@@ -184,6 +199,9 @@
   --color-extensions-wash: var(--accent-extensions-wash);
   --color-tokens-wash: var(--accent-tokens-wash);
   --color-orchestration-wash: var(--accent-orchestration-wash);
+  --color-evals-wash: var(--accent-evals-wash);
+  --color-recipes-wash: var(--accent-recipes-wash);
+  --color-troubleshooting-wash: var(--accent-troubleshooting-wash);
   --color-resources-wash: var(--accent-resources-wash);
   --color-teach-wash: var(--accent-teach-wash);
   --color-cheatsheet-wash: var(--accent-cheatsheet-wash);

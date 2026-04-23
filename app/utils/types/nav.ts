@@ -7,6 +7,9 @@ export type AccentKey =
   | "extensions"
   | "tokens"
   | "orchestration"
+  | "evals"
+  | "recipes"
+  | "troubleshooting"
   | "resources"
   | "teach"
   | "cheatsheet";

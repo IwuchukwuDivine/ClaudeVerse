@@ -1,13 +1,11 @@
-import { useColorMode, usePreferredDark } from "@vueuse/core";
+import { useColorMode } from "@vueuse/core";
 
 export const useTheme = () => {
-  const prefersDark = usePreferredDark();
-
   const mode = useColorMode({
     selector: "html",
     attribute: "class",
     modes: { light: "", dark: "dark" },
-    initialValue: prefersDark.value ? "dark" : "light",
+    initialValue: "dark",
     storageKey: "claudeverse-theme",
   });
 
