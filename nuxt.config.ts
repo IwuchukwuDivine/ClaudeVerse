@@ -22,9 +22,10 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
-  // site: {
-  //   url: "",
-  // },
+  site: {
+    url: "https://claude-verse.vercel.app",
+    name: "Claudeverse",
+  },
   sitemap: {
     defaults: {
       changefreq: "weekly",
@@ -101,6 +102,12 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/png", href: "/favicon.png" },
         { rel: "shortcut icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "apple-touch-icon", href: "/favicon.png" },
+      ],
+      script: [
+        {
+          tagPriority: "critical",
+          innerHTML: `(function(){try{var t=localStorage.getItem("claudeverse-theme");var d=t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches);if(d)document.documentElement.classList.add("dark");}catch(e){}})();`,
+        },
       ],
     },
   },

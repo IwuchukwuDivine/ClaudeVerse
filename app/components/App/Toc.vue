@@ -26,7 +26,7 @@
         <span>Back to top</span>
       </button>
       <a
-        href="https://github.com"
+        href="https://github.com/IwuchukwuDivine/ClaudeVerse"
         target="_blank"
         rel="noopener"
         class="toc__action"

@@ -146,10 +146,90 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: "Claudeverse",
-  description:
-    "A comprehensive, interactive guide to mastering Claude Code — mental models, workflows, extension points, orchestration, token optimization, and resources.",
+const title = "Claudeverse — The Developer's Universe for Claude Code Mastery";
+const description =
+  "A comprehensive, interactive guide to mastering Claude Code — mental models, workflows, extension points, orchestration, token optimization, and a workshop curriculum. No hunting through 50 blog posts.";
+
+const { url } = useSeo({
+  title,
+  description,
+  path: "/",
+  type: "website",
+  keywords: [
+    "claude code",
+    "claude",
+    "anthropic",
+    "ai coding",
+    "agentic workflows",
+    "llm development",
+    "prompt engineering",
+    "mcp",
+    "subagents",
+    "claude code tutorial",
+    "developer guide",
+  ],
+});
+
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": `${url}/#website`,
+            url,
+            name: "Claudeverse",
+            description,
+            inLanguage: "en-US",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: `${url}/?q={search_term_string}`,
+              },
+              "query-input": "required name=search_term_string",
+            },
+          },
+          {
+            "@type": "Organization",
+            "@id": `${url}/#organization`,
+            name: "Claudeverse",
+            url,
+            logo: {
+              "@type": "ImageObject",
+              url: getAbsoluteUrl("/logo.png"),
+            },
+            sameAs: ["https://twitter.com/_DeeVyn"],
+          },
+          {
+            "@type": "WebPage",
+            "@id": `${url}/#webpage`,
+            url,
+            name: title,
+            description,
+            isPartOf: { "@id": `${url}/#website` },
+            inLanguage: "en-US",
+          },
+          {
+            "@type": "ItemList",
+            name: "Claudeverse Guide Sections",
+            itemListOrder: "https://schema.org/ItemListOrderAscending",
+            numberOfItems: sections.length,
+            itemListElement: sections.map((s, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: s.title,
+              description: s.description,
+              url: getAbsoluteUrl(s.path),
+            })),
+          },
+        ],
+      }),
+    },
+  ],
 });
 
 const { clear } = useToc();

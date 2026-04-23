@@ -649,10 +649,75 @@ pnpm-lock.yaml
 import { BookOpen } from "@lucide/vue";
 import type { TocItem } from "~/utils/types/nav";
 
-useSeoMeta({
-  title: "Foundations",
-  description:
-    "Mental model, how Claude Code works, the context window, setup, CLAUDE.md, .claudeignore, configuration, models, and permissions — everything you need before writing a single prompt.",
+const seoTitle = "Foundations — Mental Model & Setup for Claude Code";
+const seoDescription =
+  "The mindset shift, how the Claude Code harness works, the context window, setup, CLAUDE.md, .claudeignore, configuration layers, models, and permissions — everything you need before writing your first prompt.";
+
+const { url, image } = useSeo({
+  title: seoTitle,
+  description: seoDescription,
+  path: "/foundations",
+  type: "article",
+  keywords: [
+    "claude code foundations",
+    "claude md",
+    "claudeignore",
+    "context window",
+    "claude code setup",
+    "claude models",
+    "permissions",
+    "mental model",
+  ],
+});
+
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            headline: seoTitle,
+            description: seoDescription,
+            url,
+            image,
+            inLanguage: "en-US",
+            author: { "@type": "Organization", name: "Claudeverse" },
+            publisher: {
+              "@type": "Organization",
+              name: "Claudeverse",
+              logo: {
+                "@type": "ImageObject",
+                url: getAbsoluteUrl("/logo.png"),
+              },
+            },
+            mainEntityOfPage: url,
+            proficiencyLevel: "Beginner",
+            timeRequired: "PT25M",
+          },
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: getAbsoluteUrl("/"),
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Foundations",
+                item: url,
+              },
+            ],
+          },
+        ],
+      }),
+    },
+  ],
 });
 
 const { setItems } = useToc();

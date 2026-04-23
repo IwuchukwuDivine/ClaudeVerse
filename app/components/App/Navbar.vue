@@ -18,7 +18,9 @@
           <span class="navbar__name">Claudeverse</span>
         </NuxtLink>
 
-        <span class="navbar__tag">The Developer's Universe for Claude Code Mastery</span>
+        <span class="navbar__tag"
+          >The Developer's Universe for Claude Code Mastery</span
+        >
       </div>
 
       <div class="navbar__search">
@@ -28,7 +30,7 @@
           placeholder="Search guide…"
           class="navbar__search-input"
           aria-label="Search"
-        >
+        />
         <kbd class="navbar__kbd">⌘K</kbd>
       </div>
 
@@ -43,7 +45,7 @@
           <span>Docs</span>
         </a>
         <a
-          href="https://github.com"
+          href="https://github.com/IwuchukwuDivine/ClaudeVerse"
           target="_blank"
           rel="noopener"
           class="navbar__link"
@@ -114,7 +116,11 @@ defineEmits<{ toggleSidebar: [] }>();
   justify-content: center;
   height: 1.75rem;
   width: 1.75rem;
-  background: linear-gradient(135deg, var(--primary), var(--accent-orchestration));
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--accent-orchestration)
+  );
   color: #fff;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
