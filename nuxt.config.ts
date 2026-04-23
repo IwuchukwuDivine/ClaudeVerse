@@ -64,8 +64,16 @@ export default defineNuxtConfig({
           content: "The Developer's Universe for Claude Code Mastery",
         },
         {
+          property: "og:url",
+          content: "https://claude-verse.vercel.app",
+        },
+        {
           property: "og:image",
-          content: "/og-image.png",
+          content: "https://claude-verse.vercel.app/og-image.png",
+        },
+        {
+          property: "og:image:secure_url",
+          content: "https://claude-verse.vercel.app/og-image.png",
         },
         {
           property: "og:image:alt",
@@ -90,7 +98,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "/og-image.png",
+          content: "https://claude-verse.vercel.app/og-image.png",
         },
         {
           name: "twitter:image:alt",
@@ -99,9 +107,25 @@ export default defineNuxtConfig({
         },
       ],
       link: [
-        { rel: "icon", type: "image/png", href: "/favicon.png" },
-        { rel: "shortcut icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "apple-touch-icon", href: "/favicon.png" },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "16x16",
+          href: "/favicon-16x16.png",
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "32x32",
+          href: "/favicon-32x32.png",
+        },
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "/apple-touch-icon.png",
+        },
+        { rel: "manifest", href: "/site.webmanifest" },
       ],
       script: [
         {
