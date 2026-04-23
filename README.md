@@ -9,6 +9,7 @@ Live site: [claude-verse.vercel.app](https://claude-verse.vercel.app)
 - [Nuxt 4](https://nuxt.com/) · Vue 3 · TypeScript (strict type-checking in dev/build)
 - [Tailwind CSS 4](https://tailwindcss.com/) (Vite plugin)
 - [Pinia](https://pinia.vuejs.org/) with persisted state
+- [@nuxt/content](https://content.nuxt.com/) (Markdown in `app/content/`)
 - [@nuxt/fonts](https://fonts.nuxt.com/) · [@nuxt/eslint](https://eslint.nuxt.com/) · [@nuxt/hints](https://hints.nuxt.com/) · [nuxt-lucide-icons](https://github.com/sandros94/nuxt-lucide-icons) · [@nuxtjs/sitemap](https://sitemap.nuxtjs.org/) · [@vueuse/core](https://vueuse.org/)
 
 ## Prerequisites
@@ -55,7 +56,7 @@ For hosting and platform-specific steps, see the [Nuxt deployment guide](https:/
 
 ## Project layout
 
-The app uses Nuxt’s `app/` directory: pages, components, composables, and utilities live under `app/`. Main guide sections and navigation are driven by `app/utils/sections.ts` (routes such as `/foundations`, `/workflows`, `/extensions`, `/tokens`, `/orchestration`, `/resources`, `/teach`, and `/cheatsheet`).
+The app uses Nuxt’s `app/` directory: pages, components, composables, and utilities live under `app/`. Guide pages are Markdown in `app/content/` (via `@nuxt/content` and `content.config.ts`). Sidebar and nav are driven by `app/utils/sections.ts`, which defines routes such as `/`, `/foundations`, `/workflows`, `/extensions`, `/tokens`, `/orchestration`, `/evals`, `/recipes`, `/troubleshooting`, `/resources`, `/teach`, and `/cheatsheet`.
 
 ## Documentation
 
