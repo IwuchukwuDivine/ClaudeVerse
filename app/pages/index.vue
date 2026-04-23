@@ -27,89 +27,105 @@
       </div>
     </section>
 
-    <section id="state-of-the-art" class="stats">
-      <div class="stat">
-        <span class="stat__value">40.8%</span>
-        <span class="stat__label"
-          >of pro developers use AI coding tools daily</span
-        >
-      </div>
-      <div class="stat">
-        <span class="stat__value">~$13</span>
-        <span class="stat__label"
-          >average spend per developer per active day</span
-        >
-      </div>
-      <div class="stat">
-        <span class="stat__value">33%</span>
-        <span class="stat__label"
-          >unguided success rate — planning closes the gap</span
-        >
-      </div>
-      <div class="stat">
-        <span class="stat__value">200K</span>
-        <span class="stat__label"
-          >tokens of context — your #1 scarce resource</span
-        >
-      </div>
-    </section>
-
-    <section id="how-to-use" class="paths">
-      <div class="path">
-        <span class="path__badge path__badge--beginner">New here</span>
-        <h2 class="path__title">Start at the top</h2>
-        <p class="path__body">
-          Read Foundations → Workflows → Extensions in order. Each section
-          builds on the last and ends with exercises you can run in your own
-          project.
+    <section id="state-of-the-art" class="anchored">
+      <header class="section-heading">
+        <h2 class="section-heading__title">The state of Claude Code</h2>
+        <p class="section-heading__subtitle">
+          Where the industry is, what it costs, and why the 200K-token window is
+          your #1 constraint.
         </p>
-        <NuxtLink to="/foundations" class="path__link">
-          Begin with Foundations
-          <LucideArrowRight :size="14" />
-        </NuxtLink>
-      </div>
-      <div class="path">
-        <span class="path__badge path__badge--advanced"
-          >Already shipping with it</span
-        >
-        <h2 class="path__title">Jump to what's costing you</h2>
-        <p class="path__body">
-          If tokens are out of control, head to Token Mastery. If you're
-          coordinating work across multiple sessions, Orchestration. If you just
-          want the shortcuts, the Cheatsheet.
-        </p>
-        <div class="path__chips">
-          <NuxtLink to="/tokens" class="path__chip">Token Mastery</NuxtLink>
-          <NuxtLink to="/orchestration" class="path__chip"
-            >Orchestration</NuxtLink
+      </header>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat__value">40.8%</span>
+          <span class="stat__label"
+            >of pro developers use AI coding tools daily</span
           >
-          <NuxtLink to="/extensions" class="path__chip">Extensions</NuxtLink>
-          <NuxtLink to="/cheatsheet" class="path__chip">Cheatsheet</NuxtLink>
+        </div>
+        <div class="stat">
+          <span class="stat__value">~$13</span>
+          <span class="stat__label"
+            >average spend per developer per active day</span
+          >
+        </div>
+        <div class="stat">
+          <span class="stat__value">33%</span>
+          <span class="stat__label"
+            >unguided success rate — planning closes the gap</span
+          >
+        </div>
+        <div class="stat">
+          <span class="stat__value">200K</span>
+          <span class="stat__label"
+            >tokens of context — your #1 scarce resource</span
+          >
         </div>
       </div>
     </section>
 
-    <section id="what-is-claudeverse" class="grid-header">
-      <div>
-        <h2 class="grid-header__title">The full guide</h2>
-        <p class="grid-header__subtitle">
-          Nine sections. Built for both self-paced learning and workshop
-          delivery.
+    <section id="how-to-use" class="anchored">
+      <header class="section-heading">
+        <h2 class="section-heading__title">How to use this guide</h2>
+        <p class="section-heading__subtitle">
+          Pick the path that matches where you are today.
         </p>
+      </header>
+      <div class="paths">
+        <div class="path">
+          <span class="path__badge path__badge--beginner">New here</span>
+          <h3 class="path__title">Start at the top</h3>
+          <p class="path__body">
+            Read Foundations → Workflows → Extensions in order. Each section
+            builds on the last and ends with exercises you can run in your own
+            project.
+          </p>
+          <NuxtLink to="/foundations" class="path__link">
+            Begin with Foundations
+            <LucideArrowRight :size="14" />
+          </NuxtLink>
+        </div>
+        <div class="path">
+          <span class="path__badge path__badge--advanced"
+            >Already shipping with it</span
+          >
+          <h3 class="path__title">Jump to what's costing you</h3>
+          <p class="path__body">
+            If tokens are out of control, head to Token Mastery. If you're
+            coordinating work across multiple sessions, Orchestration. If you
+            just want the shortcuts, the Cheatsheet.
+          </p>
+          <div class="path__chips">
+            <NuxtLink to="/tokens" class="path__chip">Token Mastery</NuxtLink>
+            <NuxtLink to="/orchestration" class="path__chip"
+              >Orchestration</NuxtLink
+            >
+            <NuxtLink to="/extensions" class="path__chip">Extensions</NuxtLink>
+            <NuxtLink to="/cheatsheet" class="path__chip">Cheatsheet</NuxtLink>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
-      <HomeSectionCard
-        v-for="section in nonHomeSections"
-        :key="section.slug"
-        :section="section"
-      />
+    <section id="what-is-claudeverse" class="anchored">
+      <header class="section-heading">
+        <h2 class="section-heading__title">What is Claudeverse</h2>
+        <p class="section-heading__subtitle">
+          {{ nonHomeSections.length }} sections covering every layer of Claude
+          Code — built for both self-paced learning and workshop delivery.
+        </p>
+      </header>
+      <div class="grid">
+        <HomeSectionCard
+          v-for="section in nonHomeSections"
+          :key="section.slug"
+          :section="section"
+        />
+      </div>
     </section>
 
     <section id="audience" class="audience">
       <div class="audience__inner">
-        <h2 class="audience__title">Who this is for</h2>
+        <h2 class="audience__title">Who it's for</h2>
         <ul class="audience__list">
           <li>
             <span class="audience__icon">
@@ -339,12 +355,33 @@ const nonHomeSections = computed(() =>
   border-color: var(--border-strong);
 }
 
+.anchored {
+  margin-bottom: 3rem;
+  scroll-margin-top: 5rem;
+}
+.section-heading {
+  margin-bottom: 1.25rem;
+}
+.section-heading__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--text-primary);
+}
+.section-heading__subtitle {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0;
+  line-height: 1.55;
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 0;
   padding: 1.5rem 0;
-  margin-bottom: 2rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -372,6 +409,9 @@ const nonHomeSections = computed(() =>
   line-height: 1.4;
 }
 @media (max-width: 640px) {
+  .hero {
+    padding: 1.5rem 0 1.5rem;
+  }
   .stat {
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
@@ -385,7 +425,6 @@ const nonHomeSections = computed(() =>
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 1rem;
-  margin-bottom: 3rem;
 }
 .path {
   padding: 1.5rem;
@@ -462,33 +501,17 @@ const nonHomeSections = computed(() =>
   color: var(--primary);
 }
 
-.grid-header {
-  margin: 1rem 0 1.25rem;
-}
-.grid-header__title {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
-  color: var(--text-primary);
-}
-.grid-header__subtitle {
-  font-size: 0.9375rem;
-  color: var(--text-muted);
-  margin: 0.25rem 0 0;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 1rem;
-  margin-bottom: 3rem;
 }
 
 .audience {
   padding: 2rem 0;
   margin-top: 2rem;
   border-top: 1px solid var(--border-subtle);
+  scroll-margin-top: 5rem;
 }
 .audience__inner {
   max-width: 44rem;

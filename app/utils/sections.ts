@@ -26,10 +26,10 @@ export const sections: NavSection[] = [
       "What Claudeverse is, who it's for, and the fastest path in based on your experience.",
     estReadTime: "3 min",
     children: [
+      { title: "The state of Claude Code", path: "/#state-of-the-art" },
+      { title: "How to use this guide", path: "/#how-to-use" },
       { title: "What is Claudeverse", path: "/#what-is-claudeverse" },
       { title: "Who it's for", path: "/#audience" },
-      { title: "How to use this guide", path: "/#how-to-use" },
-      { title: "The state of Claude Code", path: "/#state-of-the-art" },
     ],
   },
   {

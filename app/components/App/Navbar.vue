@@ -41,7 +41,7 @@
           rel="noopener"
           class="navbar__link"
         >
-          <LucideExternalLink :size="14" />
+          <LucideExternalLink :size="18" />
           <span>Docs</span>
         </a>
         <a
@@ -51,7 +51,7 @@
           class="navbar__link"
           aria-label="GitHub"
         >
-          <IconGithub :size="16" />
+          <IconGithub :size="18" />
         </a>
         <AppThemeToggle />
       </div>
@@ -219,15 +219,34 @@ defineEmits<{ toggleSidebar: [] }>();
 @media (max-width: 768px) {
   .navbar__inner {
     grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+    padding: 0.625rem 0.875rem;
   }
   .navbar__menu {
     display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
   }
   .navbar__search {
     display: none;
   }
+  .navbar__right {
+    gap: 0.125rem;
+    justify-self: end;
+  }
+  .navbar__link {
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
   .navbar__link span {
     display: none;
+  }
+  .navbar__right :deep(.theme-toggle) {
+    height: 2.5rem;
+    width: 2.5rem;
   }
 }
 </style>
