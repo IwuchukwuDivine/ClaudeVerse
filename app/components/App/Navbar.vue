@@ -48,6 +48,7 @@
           target="_blank"
           rel="noopener"
           class="navbar__link"
+          aria-label="Docs"
         >
           <LucideExternalLink :size="18" />
           <span>Docs</span>

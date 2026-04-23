@@ -2,7 +2,7 @@
   <aside
     class="sidebar"
     :class="{ 'sidebar--open': open }"
-    :aria-hidden="!open && isMobile"
+    :inert="!open && isMobile"
   >
     <nav class="sidebar__nav" aria-label="Guide sections">
       <div class="sidebar__group">
