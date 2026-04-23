@@ -71,6 +71,7 @@ export const sections: NavSection[] = [
       { title: "Feedback Loops", path: "/workflows#feedback" },
       { title: "Prompt Precision", path: "/workflows#prompts" },
       { title: "Session Management", path: "/workflows#sessions" },
+      { title: "Checkpointing", path: "/workflows#checkpoints" },
       { title: "The Big Prompt Pattern", path: "/workflows#big-prompt" },
       { title: "Best of N", path: "/workflows#best-of-n" },
       { title: "Context Handoff", path: "/workflows#handoff" },

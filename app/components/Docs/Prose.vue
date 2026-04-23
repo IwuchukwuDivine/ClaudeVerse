@@ -72,13 +72,16 @@
   font-style: italic;
 }
 .prose :deep(table) {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-collapse: collapse;
   margin: 1.25rem 0;
   font-size: 0.9375rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  overflow: hidden;
 }
 .prose :deep(th),
 .prose :deep(td) {
@@ -86,6 +89,11 @@
   text-align: left;
   border-bottom: 1px solid var(--border-subtle);
   vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.prose :deep(td code),
+.prose :deep(th code) {
+  word-break: break-word;
 }
 .prose :deep(th) {
   font-family: var(--font-display);

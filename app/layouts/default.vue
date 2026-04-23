@@ -43,6 +43,8 @@ watch(
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  overflow-x: clip;
+  max-width: 100vw;
 }
 .shell__body {
   display: grid;
