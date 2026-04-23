@@ -22,7 +22,7 @@ export const categories: Record<SearchCategoryKey, SearchCategoryMeta> = {
   topic: { key: "topic", label: "Topics", order: 20, icon: Hash },
   page: { key: "page", label: "Pages", order: 30, icon: FileText },
   heading: { key: "heading", label: "Headings", order: 40, icon: Heading },
-  command: { key: "command", label: "Commands", order: 50, icon: TerminalSquare },
+  command: { key: "command", label: "Commands", order: 50, icon: Terminal },
   external: { key: "external", label: "External", order: 60, icon: LinkIcon },
   recent: { key: "recent", label: "Recent", order: 0, icon: Clock },
 };
