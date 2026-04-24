@@ -1,0 +1,50 @@
+name: Feature request
+description: Suggest a new section, improvement, or site feature
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for Claudeverse? Whether it's new content, a UX improvement, or a site feature — we'd love to hear it.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of request
+      options:
+        - New content section
+        - Improve existing content
+        - Site feature (search, navigation, UI)
+        - Developer experience (build, tooling)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: What's missing or frustrating right now?
+      placeholder: "e.g. There's no section covering how to use Claude Code with monorepos."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: What would you like to see?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you considered any other approaches?
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Links, screenshots, or references that support the request.

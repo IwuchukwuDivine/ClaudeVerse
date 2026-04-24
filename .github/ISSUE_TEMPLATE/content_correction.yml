@@ -1,0 +1,38 @@
+name: Content correction
+description: Report inaccurate, outdated, or misleading content
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Spotted something factually wrong, outdated, or unclear? Please let us know.
+
+  - type: input
+    id: page
+    attributes:
+      label: Which page?
+      placeholder: "e.g. /tokens or the Token Mastery section"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current content
+      description: Quote the text or describe what is currently shown.
+    validations:
+      required: true
+
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should it say?
+      description: Provide the corrected text or explanation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Source or reference
+      description: Link to Anthropic docs, a GitHub issue, or another authoritative source that supports the correction.
