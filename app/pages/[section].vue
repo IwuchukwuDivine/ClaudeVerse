@@ -15,7 +15,7 @@
       <ContentRenderer :value="page" />
     </div>
 
-    <DocsPageNav
+    <LazyDocsPageNav
       v-if="page?.prev || page?.next"
       :prev="page.prev"
       :next="page.next"
