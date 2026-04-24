@@ -1,17 +1,25 @@
 {
-  "generatedAt": "2026-04-24T18:26:26.380Z",
-  "total": 30,
+  "generatedAt": "2026-04-24T18:33:17.965Z",
+  "total": 31,
   "latestDate": "2026-04-24",
   "months": [
     {
       "id": "2026-04",
       "title": "April 2026",
       "path": "/changelog#2026-04",
-      "count": 30,
+      "count": 31,
       "latestDate": "2026-04-24"
     }
   ],
   "recent": [
+    {
+      "hash": "802bcf6",
+      "date": "2026-04-24",
+      "label": "New",
+      "scope": "analytics",
+      "breaking": false,
+      "summary": "Integrate @vercel/analytics nuxt module"
+    },
     {
       "hash": "02057e1",
       "date": "2026-04-24",
@@ -67,14 +75,6 @@
       "scope": null,
       "breaking": false,
       "summary": "Add Open Graph image configuration and update dependencies"
-    },
-    {
-      "hash": "06c8442",
-      "date": "2026-04-24",
-      "label": null,
-      "scope": null,
-      "breaking": false,
-      "summary": "Add `lastUpdated` frontmatter to content schema and enhance DocsPageHeader display"
     }
   ]
 }

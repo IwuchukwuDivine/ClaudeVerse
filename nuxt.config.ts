@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxt/content",
     "nuxt-og-image",
-    "@vercel/analytics",
   ],
   vite: {
     plugins: [tailwindcss()],
@@ -134,6 +133,10 @@ export default defineNuxtConfig({
         {
           tagPriority: "critical",
           innerHTML: `(function(){try{var t=localStorage.getItem("claudeverse-theme");if(t!=="light")document.documentElement.classList.add("dark");}catch(e){document.documentElement.classList.add("dark");}})();`,
+        },
+        {
+          src: "/_vercel/insights/script.js",
+          defer: true,
         },
       ],
     },
