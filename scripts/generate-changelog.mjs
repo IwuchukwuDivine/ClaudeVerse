@@ -14,6 +14,11 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = resolve(__dirname, "../app/content/changelog.md");
+const SUMMARY_OUTPUT = resolve(
+  __dirname,
+  "../app/utils/changelog-summary.json",
+);
+const RECENT_LIMIT = 8;
 
 const SKIP = [
   /^wip\b/i,
@@ -55,16 +60,31 @@ const formatDate = (iso) => {
   return `${MONTH_NAMES[parseInt(m, 10) - 1].slice(0, 3)} ${parseInt(d, 10)}, ${y}`;
 };
 
-const formatSubject = (subject) => {
+const parseSubject = (subject) => {
   const match = subject.match(/^(\w+)(?:\(([^)]+)\))?(!)?:\s*(.+)$/);
   if (match) {
     const [, type, scope, breaking, rest] = match;
-    const label = LABELS[type.toLowerCase()] ?? capitalize(type);
-    const scopePart = scope ? ` (${scope})` : "";
-    const breakPart = breaking ? " ⚠" : "";
-    return `**${label}${breakPart}**${scopePart} — ${capitalize(rest)}`;
+    return {
+      label: LABELS[type.toLowerCase()] ?? capitalize(type),
+      scope: scope ?? null,
+      breaking: Boolean(breaking),
+      summary: capitalize(rest),
+    };
   }
-  return capitalize(subject);
+  return {
+    label: null,
+    scope: null,
+    breaking: false,
+    summary: capitalize(subject),
+  };
+};
+
+const formatSubject = (subject) => {
+  const parsed = parseSubject(subject);
+  if (!parsed.label) return parsed.summary;
+  const scopePart = parsed.scope ? ` (${parsed.scope})` : "";
+  const breakPart = parsed.breaking ? " ⚠" : "";
+  return `**${parsed.label}${breakPart}**${scopePart} — ${parsed.summary}`;
 };
 
 const readCommits = () => {
@@ -107,7 +127,6 @@ estReadTime: 3 min
 lastUpdated: ${today}
 tocItems:
 ${tocItems}
-prev: { title: Cheatsheet, path: /cheatsheet }
 seo:
   title: Changelog — Claudeverse
   description: "Every change shipped to Claudeverse, newest first — auto-generated from the git history on each build."
@@ -150,36 +169,105 @@ Welcome back. This is everything we've shipped to Claudeverse since the site wen
   return `${frontmatter}${intro}${body}\n`;
 };
 
-const main = () => {
-  try {
-    const commits = readCommits();
-    if (commits.length === 0) {
-      console.warn("[changelog] no commits found — writing placeholder");
-      writeFileSync(
-        OUTPUT,
-        `---
+const buildSummary = (commits) => {
+  const byMonth = new Map();
+  for (const c of commits) {
+    const ym = c.date.slice(0, 7);
+    if (!byMonth.has(ym)) byMonth.set(ym, []);
+    byMonth.get(ym).push(c);
+  }
+  const months = [...byMonth.keys()]
+    .sort()
+    .reverse()
+    .map((ym) => {
+      const entries = byMonth.get(ym);
+      const latestDate = entries
+        .map((c) => c.date)
+        .sort()
+        .reverse()[0];
+      return {
+        id: ym,
+        title: monthTitle(ym),
+        path: `/changelog#${ym}`,
+        count: entries.length,
+        latestDate,
+      };
+    });
+
+  const recent = commits.slice(0, RECENT_LIMIT).map((c) => {
+    const parsed = parseSubject(c.subject);
+    return {
+      hash: c.hash.slice(0, 7),
+      date: c.date,
+      label: parsed.label,
+      scope: parsed.scope,
+      breaking: parsed.breaking,
+      summary: parsed.summary,
+    };
+  });
+
+  return {
+    generatedAt: new Date().toISOString(),
+    total: commits.length,
+    latestDate: commits[0]?.date ?? null,
+    months,
+    recent,
+  };
+};
+
+const writePlaceholder = (today) => {
+  writeFileSync(
+    OUTPUT,
+    `---
 title: Changelog
 eyebrow: What's new
 accent: resources
 icon: LucideHistory
 description: Every change that's shipped to Claudeverse, newest first.
 estReadTime: 1 min
-lastUpdated: ${new Date().toISOString().slice(0, 10)}
-prev: { title: Cheatsheet, path: /cheatsheet }
+lastUpdated: ${today}
 ---
 
 Nothing to show yet.
 `,
-      );
+  );
+  writeFileSync(
+    SUMMARY_OUTPUT,
+    `${JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        total: 0,
+        latestDate: null,
+        months: [],
+        recent: [],
+      },
+      null,
+      2,
+    )}\n`,
+  );
+};
+
+const main = () => {
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+    const commits = readCommits();
+    mkdirSync(dirname(OUTPUT), { recursive: true });
+    mkdirSync(dirname(SUMMARY_OUTPUT), { recursive: true });
+    if (commits.length === 0) {
+      console.warn("[changelog] no commits found — writing placeholder");
+      writePlaceholder(today);
       return;
     }
-    const md = buildMarkdown(commits);
-    mkdirSync(dirname(OUTPUT), { recursive: true });
-    writeFileSync(OUTPUT, md);
+    writeFileSync(OUTPUT, buildMarkdown(commits));
+    writeFileSync(
+      SUMMARY_OUTPUT,
+      `${JSON.stringify(buildSummary(commits), null, 2)}\n`,
+    );
     const months = new Set(commits.map((c) => c.date.slice(0, 7))).size;
     console.log(
       `[changelog] wrote ${commits.length} commits across ${months} month(s) to ${OUTPUT}`,
     );
+    console.log(`[changelog] wrote summary to ${SUMMARY_OUTPUT}`);
   } catch (err) {
     console.error("[changelog] generation failed:", err.message);
     process.exit(1);

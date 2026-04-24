@@ -8,7 +8,6 @@ estReadTime: 3 min
 lastUpdated: 2026-04-24
 tocItems:
   - { id: "2026-04", title: April 2026, level: 2 }
-prev: { title: Cheatsheet, path: /cheatsheet }
 seo:
   title: Changelog — Claudeverse
   description: "Every change shipped to Claudeverse, newest first — auto-generated from the git history on each build."
@@ -26,6 +25,7 @@ Welcome back. This is everything we've shipped to Claudeverse since the site wen
 
 **Apr 24, 2026**
 
+- **New** — Add auto-generated changelog page with commitlint enforcement
 - Add Open Graph image configuration and update dependencies
 - Add `lastUpdated` frontmatter to content schema and enhance DocsPageHeader display
 - Add Open Graph image support and improve accessibility across components
