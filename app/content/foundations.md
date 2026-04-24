@@ -89,6 +89,19 @@ Two commands tell you where your tokens went:
 ```
 
 For continuous visibility, configure the **StatusLine** to show the current token percentage as you work. Most people discover after one week of watching it that half their "Claude is being weird" complaints were really "my context was at 90% full."
+
+Drop this into `~/.claude/settings.json` (create it if it doesn't exist):
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "npx ccusage statusline"
+  }
+}
+```
+
+`ccusage` is a community tool that reads your session and prints tokens used, percentage of window, and cost. Any command that prints a single line to stdout works here — you can swap in your own script later.
 ::::
 
 ::::docs-section{id="setup" title="Setup & Installation"}
