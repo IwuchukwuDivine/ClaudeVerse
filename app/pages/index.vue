@@ -123,6 +123,8 @@
       </div>
     </section>
 
+    <HomeRecentUpdates />
+
     <section id="audience" class="audience">
       <div class="audience__inner">
         <h2 class="audience__title">Who it's for</h2>
