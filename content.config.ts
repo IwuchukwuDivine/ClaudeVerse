@@ -40,7 +40,7 @@ export default defineContentConfig({
             "recipes",
             "troubleshooting",
             "resources",
-            "teach",
+            "workshops",
             "cheatsheet",
           ])
           .default("home"),

@@ -56,7 +56,7 @@ For hosting and platform-specific steps, see the [Nuxt deployment guide](https:/
 
 ## Project layout
 
-The app uses Nuxt’s `app/` directory: pages, components, composables, and utilities live under `app/`. Guide pages are Markdown in `app/content/` (via `@nuxt/content` and `content.config.ts`). Sidebar and nav are driven by `app/utils/sections.ts`, which defines routes such as `/`, `/foundations`, `/workflows`, `/extensions`, `/tokens`, `/orchestration`, `/evals`, `/recipes`, `/troubleshooting`, `/resources`, `/teach`, and `/cheatsheet`.
+The app uses Nuxt’s `app/` directory: pages, components, composables, and utilities live under `app/`. Guide pages are Markdown in `app/content/` (via `@nuxt/content` and `content.config.ts`). Sidebar and nav are driven by `app/utils/sections.ts`, which defines routes such as `/`, `/foundations`, `/workflows`, `/extensions`, `/tokens`, `/orchestration`, `/evals`, `/recipes`, `/troubleshooting`, `/resources`, `/workshops`, and `/cheatsheet`.
 
 ## Documentation
 

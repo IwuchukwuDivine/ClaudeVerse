@@ -124,8 +124,8 @@ defineProps<{ section: NavSection }>();
 .card--resources {
   --accent: var(--accent-resources);
 }
-.card--teach {
-  --accent: var(--accent-teach);
+.card--workshops {
+  --accent: var(--accent-workshops);
 }
 .card--cheatsheet {
   --accent: var(--accent-cheatsheet);

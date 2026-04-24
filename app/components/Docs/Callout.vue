@@ -114,7 +114,7 @@ withDefaults(
   border-left-color: var(--danger);
 }
 .callout--danger .callout__icon {
-  background: var(--accent-teach-wash);
+  background: var(--accent-workshops-wash);
   color: var(--danger);
 }
 .callout--success {

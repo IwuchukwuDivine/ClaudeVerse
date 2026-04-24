@@ -73,7 +73,7 @@ The palette should feel vibrant and energetic — like a creative coding playgro
 | Token Mastery | Yellow/Gold | `#FFD23F` |
 | Orchestration | Pink/Magenta | `#FF3CAC` |
 | Resources | Lime/Green | `#A3E635` |
-| Teach It | Red/Coral | `#EF4444` |
+| Workshops | Red/Coral | `#EF4444` |
 | Cheatsheet | Cyan | `#06B6D4` |
 
 Each accent is used for: section icon backgrounds, active nav indicators, heading underlines, callout borders, tag pills, and subtle gradient washes on section headers.
@@ -270,7 +270,7 @@ For each extension point: What it is → When to use it → How to set it up →
 - the-ai-corner.com newsletter
 - codewithmukesh.com newsletter (for .NET devs)
 
-### 8. 🎓 Teach It — Workshop Curriculum
+### 8. 🎓 Workshops — Hands-On Practicals
 
 **Module 1: Foundations (2 hours)**
 

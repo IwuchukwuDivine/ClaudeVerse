@@ -508,7 +508,7 @@ defineExpose<{ close: () => void; select: (item: SearchItem) => void }>({
 .search-dialog__row--recipes .search-dialog__row-icon,
 .search-dialog__row--troubleshooting .search-dialog__row-icon,
 .search-dialog__row--resources .search-dialog__row-icon,
-.search-dialog__row--teach .search-dialog__row-icon,
+.search-dialog__row--workshops .search-dialog__row-icon,
 .search-dialog__row--cheatsheet .search-dialog__row-icon {
   color: var(--accent, var(--primary));
   background: color-mix(in oklab, var(--accent, var(--primary)) 14%, transparent);
@@ -523,7 +523,7 @@ defineExpose<{ close: () => void; select: (item: SearchItem) => void }>({
 .search-dialog__row--recipes { --accent: var(--accent-recipes, var(--primary)); }
 .search-dialog__row--troubleshooting { --accent: var(--accent-troubleshooting, var(--primary)); }
 .search-dialog__row--resources { --accent: var(--accent-resources, var(--primary)); }
-.search-dialog__row--teach { --accent: var(--accent-teach, var(--primary)); }
+.search-dialog__row--workshops { --accent: var(--accent-workshops, var(--primary)); }
 .search-dialog__row--cheatsheet { --accent: var(--accent-cheatsheet, var(--primary)); }
 
 .search-fade-enter-active,

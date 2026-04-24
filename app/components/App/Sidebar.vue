@@ -236,9 +236,9 @@ const isActiveAnchor = (path: string) => {
   background: var(--accent-resources-wash);
   color: var(--accent-resources);
 }
-.sidebar__section--teach .sidebar__icon {
-  background: var(--accent-teach-wash);
-  color: var(--accent-teach);
+.sidebar__section--workshops .sidebar__icon {
+  background: var(--accent-workshops-wash);
+  color: var(--accent-workshops);
 }
 .sidebar__section--cheatsheet .sidebar__icon {
   background: var(--accent-cheatsheet-wash);

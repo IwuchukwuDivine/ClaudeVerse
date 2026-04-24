@@ -11,7 +11,7 @@ export type AccentKey =
   | "recipes"
   | "troubleshooting"
   | "resources"
-  | "teach"
+  | "workshops"
   | "cheatsheet";
 
 export interface NavLink {

@@ -35,7 +35,7 @@
   --accent-recipes: #c026d3;
   --accent-troubleshooting: #e11d48;
   --accent-resources: #65a30d;
-  --accent-teach: #dc2626;
+  --accent-workshops: #dc2626;
   --accent-cheatsheet: #0891b2;
 
   --accent-home-wash: #d6f5ee;
@@ -48,7 +48,7 @@
   --accent-recipes-wash: #fae8ff;
   --accent-troubleshooting-wash: #ffe4e6;
   --accent-resources-wash: #e6f3d0;
-  --accent-teach-wash: #fbd9d9;
+  --accent-workshops-wash: #fbd9d9;
   --accent-cheatsheet-wash: #ccebf3;
 
   --success: #0f9d6b;
@@ -119,7 +119,7 @@
   --accent-recipes: #e879f9;
   --accent-troubleshooting: #fb7185;
   --accent-resources: #a3e635;
-  --accent-teach: #f87171;
+  --accent-workshops: #f87171;
   --accent-cheatsheet: #22d3ee;
 
   --accent-home-wash: #0f2e29;
@@ -132,7 +132,7 @@
   --accent-recipes-wash: #2e0f35;
   --accent-troubleshooting-wash: #2e0f18;
   --accent-resources-wash: #1e2a0e;
-  --accent-teach-wash: #2e1313;
+  --accent-workshops-wash: #2e1313;
   --accent-cheatsheet-wash: #0c2a33;
 
   --success: #34d399;
@@ -190,7 +190,7 @@
   --color-recipes: var(--accent-recipes);
   --color-troubleshooting: var(--accent-troubleshooting);
   --color-resources: var(--accent-resources);
-  --color-teach: var(--accent-teach);
+  --color-workshops: var(--accent-workshops);
   --color-cheatsheet: var(--accent-cheatsheet);
 
   --color-home-wash: var(--accent-home-wash);
@@ -203,7 +203,7 @@
   --color-recipes-wash: var(--accent-recipes-wash);
   --color-troubleshooting-wash: var(--accent-troubleshooting-wash);
   --color-resources-wash: var(--accent-resources-wash);
-  --color-teach-wash: var(--accent-teach-wash);
+  --color-workshops-wash: var(--accent-workshops-wash);
   --color-cheatsheet-wash: var(--accent-cheatsheet-wash);
 
   --color-success: var(--success);

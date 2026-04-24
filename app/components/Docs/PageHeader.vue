@@ -91,8 +91,8 @@ withDefaults(
 .page-header--resources {
   --accent: var(--accent-resources);
 }
-.page-header--teach {
-  --accent: var(--accent-teach);
+.page-header--workshops {
+  --accent: var(--accent-workshops);
 }
 .page-header--cheatsheet {
   --accent: var(--accent-cheatsheet);

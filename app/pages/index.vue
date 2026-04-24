@@ -151,8 +151,8 @@
             </span>
             <div>
               <strong>Instructors and team leads</strong> running internal
-              workshops. The <NuxtLink to="/teach">Teach It</NuxtLink> section
-              is a ready-made 10-hour curriculum.
+              workshops. The <NuxtLink to="/workshops">Workshops</NuxtLink>
+              section is a set of hands-on practicals teams can run together.
             </div>
           </li>
         </ul>
