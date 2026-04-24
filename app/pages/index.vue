@@ -186,6 +186,14 @@ const { url } = useSeo({
   ],
 });
 
+defineOgImage("Default", {
+  title: "The Developer's Universe for Claude Code Mastery",
+  eyebrow: "Claudeverse",
+  description:
+    "Mental models, workflows, orchestration, token economics, and hands-on workshops — all in one place.",
+  accent: "home",
+});
+
 useHead({
   script: [
     {

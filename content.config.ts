@@ -56,6 +56,7 @@ export default defineContentConfig({
             keywords: z.array(z.string()).default([]),
             proficiencyLevel: z.string().optional(),
             timeRequired: z.string().optional(),
+            ogImage: z.string().optional(),
           })
           .optional(),
       }),

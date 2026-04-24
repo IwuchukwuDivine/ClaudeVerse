@@ -8,11 +8,11 @@
           aria-label="Toggle sidebar"
           @click="$emit('toggleSidebar')"
         >
-          <LucideMenu :size="20" />
+          <LucideMenu :size="20" aria-hidden="true" />
         </button>
 
         <NuxtLink to="/" class="navbar__brand" aria-label="Claudeverse home">
-          <span class="navbar__logo">
+          <span class="navbar__logo" aria-hidden="true">
             <LucideSparkles :size="18" />
           </span>
           <span class="navbar__name">Claudeverse</span>
@@ -29,9 +29,13 @@
         aria-label="Open search"
         @click="openSearch"
       >
-        <LucideSearch :size="16" class="navbar__search-icon" />
+        <LucideSearch
+          :size="16"
+          class="navbar__search-icon"
+          aria-hidden="true"
+        />
         <span class="navbar__search-label">Search guide…</span>
-        <kbd class="navbar__kbd">{{ shortcutHint }}</kbd>
+        <kbd class="navbar__kbd" aria-hidden="true">{{ shortcutHint }}</kbd>
       </button>
 
       <div class="navbar__right">
@@ -41,7 +45,7 @@
           aria-label="Search"
           @click="openSearch"
         >
-          <LucideSearch :size="20" />
+          <LucideSearch :size="20" aria-hidden="true" />
         </button>
         <a
           href="https://docs.claude.com"
@@ -50,7 +54,7 @@
           class="navbar__link"
           aria-label="Docs"
         >
-          <LucideExternalLink :size="18" />
+          <LucideExternalLink :size="18" aria-hidden="true" />
           <span>Docs</span>
         </a>
         <a
@@ -60,7 +64,7 @@
           class="navbar__link"
           aria-label="GitHub"
         >
-          <IconGithub :size="18" />
+          <IconGithub :size="18" aria-hidden="true" />
         </a>
         <AppThemeToggle />
       </div>

@@ -58,7 +58,18 @@ const { url, image } = useSeo({
   path: route.path,
   type: "article",
   keywords: page.value?.seo?.keywords,
+  image: page.value?.seo?.ogImage,
 });
+
+if (page.value) {
+  defineOgImage("Default", {
+    title: page.value.title,
+    eyebrow: page.value.eyebrow,
+    description: page.value.description,
+    accent: page.value.accent,
+    readTime: page.value.estReadTime,
+  });
+}
 
 useHead({
   script: [

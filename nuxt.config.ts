@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
     "@nuxt/content",
+    "nuxt-og-image",
   ],
   vite: {
     plugins: [tailwindcss()],

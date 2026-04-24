@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="section.path" class="card" :class="`card--${section.accent}`">
     <div class="card__header">
-      <span class="card__icon">
+      <span class="card__icon" aria-hidden="true">
         <ClientOnly>
           <component :is="section.icon" :size="20" />
           <template #fallback>
@@ -12,7 +12,7 @@
       <span class="card__meta">
         <span class="card__eyebrow">{{ section.tagline }}</span>
         <span v-if="section.estReadTime" class="card__time">
-          <LucideClock :size="11" />
+          <LucideClock :size="11" aria-hidden="true" />
           {{ section.estReadTime }}
         </span>
       </span>
@@ -24,7 +24,7 @@
     <div class="card__footer">
       <span class="card__cta">
         <span>Explore</span>
-        <LucideArrowRight :size="14" />
+        <LucideArrowRight :size="14" aria-hidden="true" />
       </span>
       <span v-if="section.children" class="card__count">
         {{ section.children.length }} topics

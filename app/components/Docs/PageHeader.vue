@@ -2,11 +2,11 @@
   <header class="page-header" :class="`page-header--${accent}`">
     <div class="page-header__breadcrumb">
       <NuxtLink to="/" class="page-header__crumb">Claudeverse</NuxtLink>
-      <LucideChevronRight :size="12" />
-      <span>{{ title }}</span>
+      <LucideChevronRight :size="12" aria-hidden="true" />
+      <span aria-current="page">{{ title }}</span>
     </div>
     <div class="page-header__top">
-      <div v-if="icon" class="page-header__icon">
+      <div v-if="icon" class="page-header__icon" aria-hidden="true">
         <component :is="icon" :size="22" />
       </div>
       <div class="page-header__meta">
@@ -16,7 +16,7 @@
     </div>
     <p v-if="description" class="page-header__description">{{ description }}</p>
     <div v-if="estReadTime" class="page-header__info">
-      <LucideClock :size="13" />
+      <LucideClock :size="13" aria-hidden="true" />
       <span>{{ estReadTime }} read</span>
     </div>
   </header>

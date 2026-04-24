@@ -16,13 +16,16 @@
                 `sidebar__section--${section.accent}`,
                 { 'sidebar__section--active': isActiveSection(section.path) },
               ]"
+              :aria-current="
+                isActiveSection(section.path) ? 'page' : undefined
+              "
               @click="$emit('close')"
             >
-              <span class="sidebar__icon">
+              <span class="sidebar__icon" aria-hidden="true">
                 <component :is="section.icon" :size="16" />
               </span>
               <span class="sidebar__section-title">{{ section.title }}</span>
-              <span class="sidebar__dot" />
+              <span class="sidebar__dot" aria-hidden="true" />
             </NuxtLink>
 
             <ul
@@ -30,16 +33,19 @@
               class="sidebar__children"
             >
               <li v-for="child in section.children" :key="child.path">
-                <a
-                  :href="child.path"
+                <NuxtLink
+                  :to="child.path"
                   class="sidebar__child"
                   :class="{
                     'sidebar__child--active': isActiveAnchor(child.path),
                   }"
+                  :aria-current="
+                    isActiveAnchor(child.path) ? 'location' : undefined
+                  "
                   @click="$emit('close')"
                 >
                   {{ child.title }}
-                </a>
+                </NuxtLink>
               </li>
             </ul>
           </li>
@@ -56,7 +62,7 @@
               rel="noopener"
               class="sidebar__external"
             >
-              <LucideExternalLink :size="14" />
+              <LucideExternalLink :size="14" aria-hidden="true" />
               <span>Official Docs</span>
             </a>
           </li>
@@ -67,7 +73,7 @@
               rel="noopener"
               class="sidebar__external"
             >
-              <LucideExternalLink :size="14" />
+              <LucideExternalLink :size="14" aria-hidden="true" />
               <span>Claude Code in Action</span>
             </a>
           </li>
@@ -78,7 +84,7 @@
               rel="noopener"
               class="sidebar__external"
             >
-              <IconGithub :size="14" />
+              <IconGithub :size="14" aria-hidden="true" />
               <span>GitHub</span>
             </a>
           </li>
