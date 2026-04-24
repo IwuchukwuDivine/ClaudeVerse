@@ -5,6 +5,7 @@ accent: resources
 icon: LucideMap
 description: Curated reading, official docs, community repos, courses, and tooling to keep leveling up after you've finished this guide.
 estReadTime: 10 min
+lastUpdated: 2026-04-24
 tocItems:
   - { id: official, title: Official & Free, level: 2 }
   - { id: paid, title: Paid Courses, level: 2 }

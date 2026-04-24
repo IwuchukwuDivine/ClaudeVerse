@@ -8,6 +8,7 @@
       :icon="iconComponent"
       :description="page.description"
       :est-read-time="page.estReadTime"
+      :last-updated="page.lastUpdated"
     />
 
     <div v-if="page" class="docs-content">
@@ -95,6 +96,9 @@ useHead({
               },
             },
             mainEntityOfPage: url,
+            ...(page.value?.lastUpdated
+              ? { dateModified: page.value.lastUpdated }
+              : {}),
             ...(page.value?.seo?.proficiencyLevel
               ? { proficiencyLevel: page.value.seo.proficiencyLevel }
               : {}),

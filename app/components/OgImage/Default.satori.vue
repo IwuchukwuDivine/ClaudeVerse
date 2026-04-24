@@ -9,86 +9,105 @@
       padding: '80px',
       background: `linear-gradient(135deg, #0f172a 0%, #1e293b 55%, ${accentColor}22 100%)`,
       color: '#f8fafc',
-      fontFamily: 'DM Sans, Inter, system-ui, sans-serif',
+      fontFamily: 'Inter, system-ui, sans-serif',
       position: 'relative',
     }"
   >
     <div
       :style="{
+        display: 'flex',
         position: 'absolute',
         top: '-160px',
         right: '-160px',
         width: '520px',
         height: '520px',
-        borderRadius: '9999px',
+        borderRadius: '260px',
         background: `radial-gradient(circle, ${accentColor}55 0%, transparent 70%)`,
       }"
     />
 
-    <div :style="{ display: 'flex', alignItems: 'center', gap: '16px' }">
+    <div
+      :style="{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '16px',
+      }"
+    >
       <div
         :style="{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           width: '56px',
           height: '56px',
           borderRadius: '14px',
           background: `linear-gradient(135deg, ${accentColor}, #db2777)`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '32px',
+          fontSize: '34px',
+          fontWeight: 700,
+          color: '#ffffff',
+          lineHeight: 1,
+          letterSpacing: '-0.02em',
         }"
       >
-        ✦
+        C
       </div>
       <div
         :style="{
+          display: 'flex',
           fontSize: '28px',
           fontWeight: 700,
           letterSpacing: '-0.01em',
+          color: '#f8fafc',
         }"
       >
         Claudeverse
       </div>
     </div>
 
-    <div :style="{ display: 'flex', flexDirection: 'column', gap: '24px' }">
+    <div
+      :style="{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+      }"
+    >
       <div
         v-if="eyebrow"
         :style="{
+          display: 'flex',
           fontSize: '24px',
           fontWeight: 600,
           color: accentColor,
           textTransform: 'uppercase',
-          letterSpacing: '0.08em',
+          letterSpacing: '2px',
         }"
       >
         {{ eyebrow }}
       </div>
       <div
         :style="{
-          fontSize: '88px',
+          display: 'flex',
+          fontSize: '84px',
           fontWeight: 700,
-          letterSpacing: '-0.03em',
+          letterSpacing: '-3px',
           lineHeight: 1.05,
-          maxWidth: '1000px',
+          color: '#f8fafc',
+          maxWidth: '1040px',
         }"
       >
         {{ title }}
       </div>
       <div
-        v-if="description"
+        v-if="trimmedDescription"
         :style="{
+          display: 'flex',
           fontSize: '28px',
-          color: '#cbd5e1',
           lineHeight: 1.35,
-          maxWidth: '960px',
-          display: '-webkit-box',
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden',
+          color: '#cbd5e1',
+          maxWidth: '1000px',
         }"
       >
-        {{ description }}
+        {{ trimmedDescription }}
       </div>
     </div>
 
@@ -101,13 +120,12 @@
         color: '#94a3b8',
       }"
     >
-      <div>claude-verse.vercel.app</div>
+      <div :style="{ display: 'flex' }">claude-verse.vercel.app</div>
       <div
         v-if="readTime"
         :style="{
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
           padding: '10px 20px',
           borderRadius: '9999px',
           background: `${accentColor}20`,
@@ -158,4 +176,13 @@ const ACCENT_COLORS: Record<AccentKey, string> = {
 const accentColor = computed(
   () => ACCENT_COLORS[props.accent] ?? ACCENT_COLORS.home,
 );
+
+// Satori has no line-clamp; truncate at ~160 chars so long descriptions
+// don't overflow the card.
+const trimmedDescription = computed(() => {
+  const d = (props.description ?? "").trim();
+  if (!d) return "";
+  if (d.length <= 180) return d;
+  return d.slice(0, 177).trimEnd() + "…";
+});
 </script>

@@ -5,6 +5,7 @@ accent: cheatsheet
 icon: LucideKeyboard
 description: Slash commands, keyboard shortcuts, CLI flags, file structure, and battle-tested patterns — the one-page reference you'll actually paste above your monitor.
 estReadTime: 8 min
+lastUpdated: 2026-04-24
 tocItems:
   - { id: commands, title: Slash Commands, level: 2 }
   - { id: shortcuts, title: Keyboard Shortcuts, level: 2 }

@@ -1,5 +1,6 @@
 import type { SearchProvider } from "~/utils/types/search";
 import sectionsProvider from "./providers/sectionsProvider";
+import contentProvider from "./providers/contentProvider";
 
 /**
  * Global, mutable provider registry.
@@ -33,3 +34,4 @@ export const listSearchProviders = (): SearchProvider[] =>
 // Default registrations. Adding a new source later = one extra line here.
 // -----------------------------------------------------------------------------
 registerSearchProvider(sectionsProvider);
+registerSearchProvider(contentProvider);

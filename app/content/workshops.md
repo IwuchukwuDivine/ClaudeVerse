@@ -5,6 +5,7 @@ accent: workshops
 icon: LucideGraduationCap
 description: Hands-on practicals — guided build-alongs for every major Claude Code concept, plus timed challenges to sharpen your instincts.
 estReadTime: "Pick one, ~45 min each"
+lastUpdated: 2026-04-24
 tocItems:
   - { id: how-to-use, title: How to use this page, level: 2 }
   - { id: build-alongs, title: Build-alongs, level: 2 }

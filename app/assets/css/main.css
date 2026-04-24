@@ -314,3 +314,104 @@ pre,
 samp {
   font-family: var(--font-mono);
 }
+
+/* ------------------------------------------------------------------------- */
+/* Print styles                                                              */
+/* Keep pages (especially /cheatsheet) usable when printed: drop chrome,     */
+/* force light mode, collapse layout to a single readable column.            */
+/* ------------------------------------------------------------------------- */
+@media print {
+  :root,
+  .dark {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-elevated: #ffffff;
+    --surface-sunken: #f6f6f6;
+    --text-primary: #111111;
+    --text-secondary: #222222;
+    --text-muted: #555555;
+    --border: #d0d0d0;
+    --border-subtle: #e5e5e5;
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  .navbar,
+  .sidebar,
+  .toc,
+  .app-shell__sidebar,
+  .app-shell__toc,
+  .skip-link,
+  .docs-page-nav,
+  .page-header__breadcrumb,
+  .search-dialog,
+  [data-no-print],
+  nav[aria-label="Guide sections"],
+  nav[aria-label="On this page"] {
+    display: none !important;
+  }
+
+  main,
+  .app-shell,
+  .app-shell__main,
+  article {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  article,
+  .docs-content {
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  pre,
+  table,
+  figure,
+  .docs-section,
+  .docs-callout {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a {
+    color: #111 !important;
+    text-decoration: underline;
+  }
+
+  /* Show the target of external links so the printed page is self-contained. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+    word-break: break-all;
+  }
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: "";
+  }
+
+  pre,
+  code,
+  kbd {
+    background: #f4f4f4 !important;
+    color: #111 !important;
+    border: 1px solid #d0d0d0 !important;
+  }
+}

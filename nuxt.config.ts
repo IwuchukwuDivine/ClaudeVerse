@@ -10,8 +10,6 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "nuxt-lucide-icons",
     "@nuxtjs/sitemap",
-    "@pinia/nuxt",
-    "pinia-plugin-persistedstate/nuxt",
     "@nuxt/content",
     "nuxt-og-image",
   ],
@@ -96,22 +94,6 @@ export default defineNuxtConfig({
           property: "og:url",
           content: "https://claude-verse.vercel.app",
         },
-        {
-          property: "og:image",
-          content: "https://claude-verse.vercel.app/og-image.png",
-        },
-        {
-          property: "og:image:secure_url",
-          content: "https://claude-verse.vercel.app/og-image.png",
-        },
-        {
-          property: "og:image:alt",
-          content:
-            "Claudeverse — The Developer's Universe for Claude Code Mastery",
-        },
-        { property: "og:image:type", content: "image/png" },
-        { property: "og:image:width", content: "1200" },
-        { property: "og:image:height", content: "630" },
 
         // Twitter / X Card
         { name: "twitter:card", content: "summary_large_image" },
@@ -124,15 +106,6 @@ export default defineNuxtConfig({
         {
           name: "twitter:description",
           content: "The Developer's Universe for Claude Code Mastery",
-        },
-        {
-          name: "twitter:image",
-          content: "https://claude-verse.vercel.app/og-image.png",
-        },
-        {
-          name: "twitter:image:alt",
-          content:
-            "Claudeverse — The Developer's Universe for Claude Code Mastery",
         },
       ],
       link: [
