@@ -47,6 +47,22 @@
         >
           <LucideSearch :size="20" aria-hidden="true" />
         </button>
+        <NuxtLink
+          to="/changelog"
+          class="navbar__link navbar__whats-new"
+          :aria-label="
+            hasUnread ? 'What\'s new (unread updates)' : 'What\'s new'
+          "
+          @click="markSeen"
+        >
+          <LucideHistory :size="18" aria-hidden="true" />
+          <span>What's new</span>
+          <span
+            v-if="hasUnread"
+            class="navbar__whats-new-dot"
+            aria-hidden="true"
+          />
+        </NuxtLink>
         <a
           href="https://docs.claude.com"
           target="_blank"
@@ -76,6 +92,7 @@
 defineEmits<{ toggleSidebar: [] }>();
 
 const { open, toggle } = useSearch();
+const { hasUnread, markSeen } = useWhatsNew();
 
 const isMac = ref(false);
 const shortcutHint = computed(() => (isMac.value ? "⌘K" : "Ctrl K"));
@@ -287,6 +304,39 @@ onBeforeUnmount(() => {
   color: var(--text-primary);
   border-color: var(--border);
 }
+.navbar__whats-new {
+  position: relative;
+}
+.navbar__whats-new-dot {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 0 2px var(--bg);
+  animation: navbar-whats-new-pulse 2s ease-in-out infinite;
+}
+@keyframes navbar-whats-new-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar__whats-new-dot {
+    animation: none;
+  }
+}
+.router-link-active.navbar__whats-new .navbar__whats-new-dot {
+  display: none;
+}
 
 @media (max-width: 1024px) {
   .navbar__tag {
@@ -339,8 +389,12 @@ onBeforeUnmount(() => {
     width: 22px;
     height: 22px;
   }
-  .navbar__link span {
+  .navbar__link span:not(.navbar__whats-new-dot) {
     display: none;
+  }
+  .navbar__whats-new-dot {
+    top: 0.5rem;
+    right: 0.5rem;
   }
   .navbar__right :deep(.theme-toggle) {
     height: 2.75rem;
