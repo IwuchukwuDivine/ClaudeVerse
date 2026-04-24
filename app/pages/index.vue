@@ -123,6 +123,8 @@
       </div>
     </section>
 
+    <HomeRecentUpdates />
+
     <section id="audience" class="audience">
       <div class="audience__inner">
         <h2 class="audience__title">Who it's for</h2>
@@ -184,6 +186,14 @@ const { url } = useSeo({
     "claude code tutorial",
     "developer guide",
   ],
+});
+
+defineOgImage("Default", {
+  title: "The Developer's Universe for Claude Code Mastery",
+  eyebrow: "Claudeverse",
+  description:
+    "Mental models, workflows, orchestration, token economics, and hands-on workshops — all in one place.",
+  accent: "home",
 });
 
 useHead({

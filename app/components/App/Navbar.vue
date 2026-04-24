@@ -8,11 +8,11 @@
           aria-label="Toggle sidebar"
           @click="$emit('toggleSidebar')"
         >
-          <LucideMenu :size="20" />
+          <LucideMenu :size="20" aria-hidden="true" />
         </button>
 
         <NuxtLink to="/" class="navbar__brand" aria-label="Claudeverse home">
-          <span class="navbar__logo">
+          <span class="navbar__logo" aria-hidden="true">
             <LucideSparkles :size="18" />
           </span>
           <span class="navbar__name">Claudeverse</span>
@@ -29,9 +29,13 @@
         aria-label="Open search"
         @click="openSearch"
       >
-        <LucideSearch :size="16" class="navbar__search-icon" />
+        <LucideSearch
+          :size="16"
+          class="navbar__search-icon"
+          aria-hidden="true"
+        />
         <span class="navbar__search-label">Search guide…</span>
-        <kbd class="navbar__kbd">{{ shortcutHint }}</kbd>
+        <kbd class="navbar__kbd" aria-hidden="true">{{ shortcutHint }}</kbd>
       </button>
 
       <div class="navbar__right">
@@ -41,8 +45,24 @@
           aria-label="Search"
           @click="openSearch"
         >
-          <LucideSearch :size="20" />
+          <LucideSearch :size="20" aria-hidden="true" />
         </button>
+        <NuxtLink
+          to="/changelog"
+          class="navbar__link navbar__whats-new"
+          :aria-label="
+            hasUnread ? 'What\'s new (unread updates)' : 'What\'s new'
+          "
+          @click="markSeen"
+        >
+          <LucideHistory :size="18" aria-hidden="true" />
+          <span>What's new</span>
+          <span
+            v-if="hasUnread"
+            class="navbar__whats-new-dot"
+            aria-hidden="true"
+          />
+        </NuxtLink>
         <a
           href="https://docs.claude.com"
           target="_blank"
@@ -50,7 +70,7 @@
           class="navbar__link"
           aria-label="Docs"
         >
-          <LucideExternalLink :size="18" />
+          <LucideExternalLink :size="18" aria-hidden="true" />
           <span>Docs</span>
         </a>
         <a
@@ -60,7 +80,7 @@
           class="navbar__link"
           aria-label="GitHub"
         >
-          <IconGithub :size="18" />
+          <IconGithub :size="18" aria-hidden="true" />
         </a>
         <AppThemeToggle />
       </div>
@@ -72,6 +92,7 @@
 defineEmits<{ toggleSidebar: [] }>();
 
 const { open, toggle } = useSearch();
+const { hasUnread, markSeen } = useWhatsNew();
 
 const isMac = ref(false);
 const shortcutHint = computed(() => (isMac.value ? "⌘K" : "Ctrl K"));
@@ -283,6 +304,39 @@ onBeforeUnmount(() => {
   color: var(--text-primary);
   border-color: var(--border);
 }
+.navbar__whats-new {
+  position: relative;
+}
+.navbar__whats-new-dot {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 0 2px var(--bg);
+  animation: navbar-whats-new-pulse 2s ease-in-out infinite;
+}
+@keyframes navbar-whats-new-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar__whats-new-dot {
+    animation: none;
+  }
+}
+.router-link-active.navbar__whats-new .navbar__whats-new-dot {
+  display: none;
+}
 
 @media (max-width: 1024px) {
   .navbar__tag {
@@ -335,8 +389,12 @@ onBeforeUnmount(() => {
     width: 22px;
     height: 22px;
   }
-  .navbar__link span {
+  .navbar__link span:not(.navbar__whats-new-dot) {
     display: none;
+  }
+  .navbar__whats-new-dot {
+    top: 0.5rem;
+    right: 0.5rem;
   }
   .navbar__right :deep(.theme-toggle) {
     height: 2.75rem;

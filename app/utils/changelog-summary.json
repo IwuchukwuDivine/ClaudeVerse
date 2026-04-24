@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-04-24T18:11:27.918Z",
+  "total": 25,
+  "latestDate": "2026-04-24",
+  "months": [
+    {
+      "id": "2026-04",
+      "title": "April 2026",
+      "path": "/changelog#2026-04",
+      "count": 25,
+      "latestDate": "2026-04-24"
+    }
+  ],
+  "recent": [
+    {
+      "hash": "03b37bf",
+      "date": "2026-04-24",
+      "label": "New",
+      "scope": null,
+      "breaking": false,
+      "summary": "Add auto-generated changelog page with commitlint enforcement"
+    },
+    {
+      "hash": "4274da8",
+      "date": "2026-04-24",
+      "label": null,
+      "scope": null,
+      "breaking": false,
+      "summary": "Add Open Graph image configuration and update dependencies"
+    },
+    {
+      "hash": "06c8442",
+      "date": "2026-04-24",
+      "label": null,
+      "scope": null,
+      "breaking": false,
+      "summary": "Add `lastUpdated` frontmatter to content schema and enhance DocsPageHeader display"
+    },
+    {
+      "hash": "a45fea2",
+      "date": "2026-04-24",
+      "label": null,
+      "scope": null,
+      "breaking": false,
+      "summary": "Add Open Graph image support and improve accessibility across components"
+    },
+    {
+      "hash": "82cd0da",
+      "date": "2026-04-24",
+      "label": null,
+      "scope": null,
+      "breaking": false,
+      "summary": "Rename \"Teach\" section to \"Workshops\" and update related content"
+    },
+    {
+      "hash": "5e5f654",
+      "date": "2026-04-24",
+      "label": null,
+      "scope": null,
+      "breaking": false,
+      "summary": "Refactor file-hiding documentation to clarify usage of `.gitignore` and `permissions.deny`"
+    },
+    {
+      "hash": "8ddec87",
+      "date": "2026-04-24",
+      "label": null,
+      "scope": null,
+      "breaking": false,
+      "summary": "Revise recipes documentation to enhance clarity and structure"
+    },
+    {
+      "hash": "0ea5671",
+      "date": "2026-04-24",
+      "label": null,
+      "scope": null,
+      "breaking": false,
+      "summary": "Enhance evals documentation with structured sections and improved descriptions"
+    }
+  ]
+}

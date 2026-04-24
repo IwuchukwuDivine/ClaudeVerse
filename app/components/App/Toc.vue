@@ -11,6 +11,7 @@
           :href="`#${item.id}`"
           class="toc__link"
           :class="{ 'toc__link--active': activeId === item.id }"
+          :aria-current="activeId === item.id ? 'location' : undefined"
           @click="setActive(item.id)"
         >
           {{ item.title }}
@@ -18,11 +19,11 @@
       </li>
     </ul>
 
-    <div class="toc__divider" />
+    <div class="toc__divider" aria-hidden="true" />
 
     <div class="toc__actions">
       <button type="button" class="toc__action" @click="scrollTop">
-        <LucideArrowUp :size="13" />
+        <LucideArrowUp :size="13" aria-hidden="true" />
         <span>Back to top</span>
       </button>
       <a
@@ -31,7 +32,7 @@
         rel="noopener"
         class="toc__action"
       >
-        <LazyIconGithub :size="13" />
+        <LazyIconGithub :size="13" aria-hidden="true" />
         <span>Edit on GitHub</span>
       </a>
     </div>

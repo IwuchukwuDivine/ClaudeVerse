@@ -8,13 +8,14 @@
       :icon="iconComponent"
       :description="page.description"
       :est-read-time="page.estReadTime"
+      :last-updated="page.lastUpdated"
     />
 
     <div v-if="page" class="docs-content">
       <ContentRenderer :value="page" />
     </div>
 
-    <DocsPageNav
+    <LazyDocsPageNav
       v-if="page?.prev || page?.next"
       :prev="page.prev"
       :next="page.next"
@@ -58,7 +59,18 @@ const { url, image } = useSeo({
   path: route.path,
   type: "article",
   keywords: page.value?.seo?.keywords,
+  image: page.value?.seo?.ogImage,
 });
+
+if (page.value) {
+  defineOgImage("Default", {
+    title: page.value.title,
+    eyebrow: page.value.eyebrow,
+    description: page.value.description,
+    accent: page.value.accent,
+    readTime: page.value.estReadTime,
+  });
+}
 
 useHead({
   script: [
@@ -84,6 +96,9 @@ useHead({
               },
             },
             mainEntityOfPage: url,
+            ...(page.value?.lastUpdated
+              ? { dateModified: page.value.lastUpdated }
+              : {}),
             ...(page.value?.seo?.proficiencyLevel
               ? { proficiencyLevel: page.value.seo.proficiencyLevel }
               : {}),

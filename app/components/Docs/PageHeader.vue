@@ -2,11 +2,11 @@
   <header class="page-header" :class="`page-header--${accent}`">
     <div class="page-header__breadcrumb">
       <NuxtLink to="/" class="page-header__crumb">Claudeverse</NuxtLink>
-      <LucideChevronRight :size="12" />
-      <span>{{ title }}</span>
+      <LucideChevronRight :size="12" aria-hidden="true" />
+      <span aria-current="page">{{ title }}</span>
     </div>
     <div class="page-header__top">
-      <div v-if="icon" class="page-header__icon">
+      <div v-if="icon" class="page-header__icon" aria-hidden="true">
         <component :is="icon" :size="22" />
       </div>
       <div class="page-header__meta">
@@ -15,9 +15,22 @@
       </div>
     </div>
     <p v-if="description" class="page-header__description">{{ description }}</p>
-    <div v-if="estReadTime" class="page-header__info">
-      <LucideClock :size="13" />
-      <span>{{ estReadTime }} read</span>
+    <div
+      v-if="estReadTime || formattedLastUpdated"
+      class="page-header__info"
+    >
+      <span v-if="estReadTime" class="page-header__info-item">
+        <LucideClock :size="13" aria-hidden="true" />
+        <span>{{ estReadTime }} read</span>
+      </span>
+      <span
+        v-if="formattedLastUpdated"
+        class="page-header__info-item"
+        :title="`Last updated ${props.lastUpdated}`"
+      >
+        <LucideHistory :size="13" aria-hidden="true" />
+        <span>Updated {{ formattedLastUpdated }}</span>
+      </span>
     </div>
   </header>
 </template>
@@ -25,7 +38,7 @@
 <script setup lang="ts">
 import type { AccentKey } from "~/utils/types/nav";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title: string;
     description?: string;
@@ -33,9 +46,21 @@ withDefaults(
     icon?: Component | string;
     accent?: AccentKey;
     estReadTime?: string;
+    lastUpdated?: string;
   }>(),
   { accent: "home" },
 );
+
+const formattedLastUpdated = computed(() => {
+  if (!props.lastUpdated) return null;
+  const d = new Date(props.lastUpdated);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+});
 </script>
 
 <style scoped>
@@ -155,9 +180,19 @@ withDefaults(
 .page-header__info {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
   margin-top: 1rem;
   font-size: 0.8125rem;
   color: var(--text-muted);
+}
+.page-header__info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.page-header__info-item + .page-header__info-item {
+  padding-left: 1rem;
+  border-left: 1px solid var(--border-subtle);
 }
 </style>

@@ -45,6 +45,7 @@ export default defineContentConfig({
           ])
           .default("home"),
         estReadTime: z.string().optional(),
+        lastUpdated: z.string().optional(),
         intro: z.string().optional(),
         tocItems: z.array(tocItemSchema).default([]),
         prev: navLinkSchema.optional(),
@@ -56,6 +57,7 @@ export default defineContentConfig({
             keywords: z.array(z.string()).default([]),
             proficiencyLevel: z.string().optional(),
             timeRequired: z.string().optional(),
+            ogImage: z.string().optional(),
           })
           .optional(),
       }),

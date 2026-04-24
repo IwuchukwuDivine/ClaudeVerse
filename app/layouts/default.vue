@@ -23,6 +23,8 @@
       <AppToc />
     </div>
 
+    <AppFooter />
+
     <AppSearchDialog />
   </div>
 </template>
