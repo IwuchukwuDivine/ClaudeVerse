@@ -13,7 +13,6 @@ tocItems:
   - { id: files, title: File Structure, level: 2 }
   - { id: patterns, title: Patterns, level: 2 }
 prev: { title: Workshops, path: /workshops }
-next: { title: Changelog, path: /changelog }
 seo:
   title: Cheatsheet — One-Page Claude Code Reference
   description: "The one-page Claude Code reference: slash commands, keyboard shortcuts, CLI flags, file locations, model routing rules, token budgets, and the patterns you want within arm's reach."
