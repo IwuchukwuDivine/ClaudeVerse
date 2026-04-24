@@ -25,6 +25,11 @@ Welcome back. This is everything we've shipped to Claudeverse since the site wen
 
 **Apr 24, 2026**
 
+- **Performance** (docs) — Lazy-load DocsPageNav to defer offscreen nav rendering
+- **New** (home) — Add recently shipped card to the landing page
+- **New** (navbar) — Add what's new pill with unread indicator
+- **New** (changelog) — Emit summary json and drop prev-page link
+- **Refactor** (nav) — Move changelog out of sidebar into footer
 - **New** — Add auto-generated changelog page with commitlint enforcement
 - Add Open Graph image configuration and update dependencies
 - Add `lastUpdated` frontmatter to content schema and enhance DocsPageHeader display

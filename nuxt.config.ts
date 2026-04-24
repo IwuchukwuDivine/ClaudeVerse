@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxt/content",
     "nuxt-og-image",
+    "@vercel/analytics",
   ],
   vite: {
     plugins: [tailwindcss()],
