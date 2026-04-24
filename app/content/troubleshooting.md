@@ -22,7 +22,7 @@ seo:
     - claude code troubleshooting
     - claude code errors
     - mcp server debug
-    - claudeignore
+    - permissions deny
     - hook didnt fire
     - rate limit
     - token spike
@@ -39,7 +39,7 @@ This chapter is organized by symptom, not by cause. You landed here because some
 ### Likely causes (check in this order)
 
 1. **Claude's cwd isn't where you think it is.** Subagents especially start with their own cwd. This is the #1 cause.
-2. **`.claudeignore` is hiding the file.** Same behavior as `.gitignore` — if it matches, Claude can't see it.
+2. **`.gitignore` or `permissions.deny` is hiding the file.** Claude respects gitignore for searches; `permissions.deny` blocks reads explicitly.
 3. **Wrong path or case mismatch.** `components/Button.tsx` vs `components/button.tsx` — macOS forgives, Linux doesn't.
 4. **Git worktree confusion.** You opened Claude from `../repo-feat` but keep giving it paths from `../repo`.
 5. **File type excluded.** Very large files, binaries, and some lock files are skipped silently.
@@ -50,17 +50,18 @@ This chapter is organized by symptom, not by cause. You landed here because some
 Before you look for the file, run:
   1. pwd
   2. ls -la
-  3. cat .claudeignore 2>/dev/null | head -40
-  4. git worktree list
+  3. git check-ignore -v <the-path-you-expect>
+  4. cat .claude/settings.json | jq '.permissions.deny // []'
+  5. git worktree list
 
 Then tell me where you think the file is and where you actually are.
 ```
 
-If `.claudeignore` is the culprit, either remove the pattern or point Claude to the absolute path (ignore rules still apply to globs, but an explicit `Read` of an absolute path works in most setups).
+If `.gitignore` is filtering it out of search results, point Claude at the explicit path with `Read` — gitignore affects listing and searching, not explicit reads. If `permissions.deny` is blocking it, remove or narrow the rule in `.claude/settings.json`.
 
 ### Prevention
 
-Keep `.claudeignore` as the first thing you set up per [Foundations → .claudeignore](/foundations#claudeignore) — the 30-second investment prevents a full category of "it's missing" confusion.
+Get `.gitignore` right before anything else, and use `permissions.deny` surgically — see [Foundations → Hiding Files from Claude](/foundations#hiding-files). The 30-second setup prevents a full category of "it's missing" confusion.
 ::::
 
 ::::docs-section{id="out-of-context" title="Out of Context Errors"}
@@ -205,7 +206,7 @@ When you add a new MCP server, always test it in a scratch shell before wiring i
 
 ### Likely causes
 
-1. **No `.claudeignore`.** Claude is reading `node_modules/`, `dist/`, `.next/`, build outputs — tens of thousands of tokens per session of pure noise.
+1. **`.gitignore` doesn't cover your stack's build outputs.** Claude respects gitignore for searches, so anything gitignored is already hidden — but if `dist/`, `.next/`, or a language-specific cache isn't gitignored, Claude reads it. Tens of thousands of wasted tokens per session.
 2. **`CLAUDE.md` is 15K tokens.** It loads _every session_, so every session pays the tax before you've typed anything.
 3. **Tool loop.** Claude called the same thing 40 times because each result pointed back to the same missing dependency.
 4. **Huge file reads.** A single `Read` on a 5K-line file is 15K tokens. Multiply by 10 reads.
@@ -224,11 +225,11 @@ Look at `/context`:
 - **System + tools > 50K** → you have too many MCP servers loaded or too many hooks.
 - **CLAUDE.md > 5K** → put it on a diet. See [Tokens → CLAUDE.md Diet](/tokens#diet).
 - **Conversation > 100K** → you're in a marathon session; hand off per [Workflows → Context Handoff](/workflows#handoff).
-- **Files > 30K and you didn't ask for that** → missing `.claudeignore`.
+- **Files > 30K and you didn't ask for that** → a path Claude read that should've been gitignored, or a large committed file that needs `Read(...)` denied.
 
 ### The three highest-leverage fixes
 
-1. Add a `.claudeignore` with `node_modules/`, `dist/`, build artifacts, `.git/` contents, `.cache/`. Recovers 20–40K tokens in most repos.
+1. Audit your `.gitignore`. Make sure `node_modules/`, `dist/`, build artifacts, and `.cache/` are in it. Claude respects it for searches, and that recovers 20–40K tokens in most repos. For committed-but-oversized paths, add a `Read(./path/**)` to `permissions.deny`.
 2. Halve your `CLAUDE.md`. Every token there pays interest on every session.
 3. Route routine tasks to Haiku. Subagents especially.
 

@@ -129,7 +129,7 @@ Each accent is used for: section icon backgrounds, active nav indicators, headin
 - **The Context Window** — why it's your #1 resource, 200K tokens, how it fills, performance degradation
 - **Setup & Installation** — terminal CLI, VS Code extension, desktop app, browser (claude.ai/code), JetBrains
 - **CLAUDE.md Deep Dive** — what to include, what NOT to include, keep under 5K tokens, tiered architecture (core → referenced docs), the WHAT-WHY-HOW framework
-- **.claudeignore** — like .gitignore for Claude, excludes node_modules/dist/lock files/build artifacts
+- **Hiding Files from Claude** — `.gitignore` respect (the default for Glob/Grep) + `permissions.deny` for secrets/PII. Note: `.claudeignore` is NOT an official Claude Code feature; community workarounds exist but `permissions.deny` is the documented path.
 - **Configuration Layers** — project (.claude/settings.json), user (~/.claude/), CLI flags, env vars
 - **Models** — Opus (complex reasoning, architecture), Sonnet (general work, token efficient), Haiku (fast exploration). Default behavior on different plans.
 - **Permissions & Safety** — sandboxing, --dangerously-skip-permissions, when to use it, risk tolerance
@@ -278,7 +278,7 @@ For each extension point: What it is → When to use it → How to set it up →
 - Install + first session walkthrough (live demo)
 - CLAUDE.md: writing effective project memory (hands-on exercise)
 - Context window mechanics: why performance degrades, how to monitor
-- .claudeignore setup, /cost, /clear, /compact
+- File-hiding setup (`.gitignore` + `permissions.deny`), /cost, /clear, /compact
 - Exercise: Participants write CLAUDE.md for a real project
 
 **Module 2: The Plan→Execute Workflow (2 hours)**
@@ -376,7 +376,7 @@ For each extension point: What it is → When to use it → How to set it up →
 ```
 project/
 ├── CLAUDE.md                    # Project memory (keep <5K tokens)
-├── .claudeignore                # Files Claude should never read
+├── .gitignore                   # Claude respects this for searches; keep it tight
 ├── .claude/
 │   ├── settings.json            # Project settings, hooks, permissions
 │   ├── commands/                # Slash command templates (.md files)

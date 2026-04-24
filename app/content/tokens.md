@@ -51,7 +51,7 @@ Tokens are both a **unit of charge** and a **unit of cognition**. You pay per mi
 | **Sonnet 4.6** | $3                 | $15                 | $0.30       |
 | **Haiku 4.5**  | $0.80              | $4                  | $0.08       |
 
-One hour of Opus work on a dense codebase can easily touch 2M input tokens — that's $30 before you count output. The same hour on Sonnet with a disciplined `.claudeignore` is under $6. The rules below close that gap without sacrificing capability.
+One hour of Opus work on a dense codebase can easily touch 2M input tokens — that's $30 before you count output. The same hour on Sonnet with a disciplined `.gitignore` and a small `permissions.deny` list is under $6. The rules below close that gap without sacrificing capability.
 
 :::docs-callout{variant="warning" title="The compounding tax"}
 A bloated context doesn't just cost more per turn — it makes Claude worse. A worse Claude writes a bug. The bug triggers rework. The rework burns another 40K tokens. Over the course of a day, a 2× token multiplier from context bloat typically becomes a 3–4× cost multiplier once the rework is counted. Every fix in this chapter compounds.
@@ -65,11 +65,11 @@ The context window is 200K, but in practice performance flattens once you cross 
 ::::docs-section{id="three-fixes" title="The 3 Fixes That Cut Usage in Half"}
 Before any clever tuning, get these three right. They are responsible for 80% of the savings on a typical project. Expect 40–60% bill drop on day one.
 
-### Fix #1 — A real `.claudeignore`
+### Fix #1 — A tight `.gitignore` (plus `permissions.deny` for secrets)
 
-Without one, Claude's first `ls` may pull 100K tokens of `node_modules`, lockfiles, and build artifacts. A 10-minute `.claudeignore` prevents this for every session forever.
+Without the noise excluded, Claude's first `ls` or `Glob` may pull 100K tokens of `node_modules`, lockfiles, and build artifacts. The good news: Claude Code respects your `.gitignore` for search-style operations, so if your gitignore is sane, this is already mostly done for free. Five minutes auditing it is the highest-leverage thing you'll do this week.
 
-```plaintext [.claudeignore]
+```plaintext [.gitignore — the token-saving entries]
 node_modules/
 vendor/
 .venv/
@@ -82,16 +82,26 @@ build/
 *.log
 *.min.js
 *.min.css
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
-.env
-.env.*
-*.pem
-*.key
 **/generated/
 **/*.snap
 ```
+
+For secrets and sensitive paths that _shouldn't_ be gitignored (because they're files you want tracked, or because you want stricter enforcement than gitignore provides), add a `permissions.deny` block to `.claude/settings.json`:
+
+```json [.claude/settings.json]
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(cat .env*)",
+      "Read(./fixtures/customer-data/**)"
+    ]
+  }
+}
+```
+
+See [Foundations → Hiding Files from Claude](/foundations#hiding-files) for the full breakdown — including why `.claudeignore` isn't the right answer despite what you'll see in community posts.
 
 ### Fix #2 — CLAUDE.md under 3K tokens
 
@@ -102,7 +112,7 @@ yarn.lock
 Opus is 5× the price of Sonnet and 18× the price of Haiku. Default to Sonnet. Switch to Opus only for architecture, security, and multi-file reasoning. Let Haiku handle subagent grunt work. A simple reroute of "exploration subagents" from Sonnet to Haiku typically saves 30% on the bill with no visible loss in quality.
 
 :::docs-callout{variant="success" title="The 24-hour test"}
-Do these three on a Monday. Look at your `/cost` output on Friday. You will have saved at least 40%. This is not an aspirational claim — it's a universal outcome. If your bill didn't drop, you didn't commit the `.claudeignore`.
+Do these three on a Monday. Look at your `/cost` output on Friday. You will have saved at least 40%. This is not an aspirational claim — it's a universal outcome. If your bill didn't drop, check your `.gitignore` actually covers your stack's build outputs.
 :::
 ::::
 
@@ -449,7 +459,7 @@ Individual discipline scales to about five engineers. Past that you need instrum
 
 ### The shared defaults pattern
 
-Commit a team `settings.json`, a thorough `.claudeignore`, a short `CLAUDE.md`, and the trim hook above. Every engineer on the team inherits the savings without reading this page. Put personal preferences in `~/.claude/settings.json` — never in the project file.
+Commit a team `settings.json` (with a sensible `permissions.deny` list), a tight `.gitignore`, a short `CLAUDE.md`, and the trim hook above. Every engineer on the team inherits the savings without reading this page. Put personal preferences in `~/.claude/settings.json` — never in the project file.
 
 ```json [.claude/settings.json (team defaults)]
 {
@@ -479,7 +489,7 @@ Commit a team `settings.json`, a thorough `.claudeignore`, a short `CLAUDE.md`, 
 
 ### Budget alerts at the org level
 
-Team and Enterprise plans expose per-seat usage to admins. Set weekly email alerts at 70% of budget and a hard cap at 100%. Have the one engineer who blew past 70% walk you through their session — nine times out of ten you'll find a missing `.claudeignore` or a runaway subagent loop that the team can learn from.
+Team and Enterprise plans expose per-seat usage to admins. Set weekly email alerts at 70% of budget and a hard cap at 100%. Have the one engineer who blew past 70% walk you through their session — nine times out of ten you'll find a gap in `.gitignore` coverage or a runaway subagent loop that the team can learn from.
 
 ### The monthly audit
 
@@ -495,7 +505,7 @@ Put this together and a single session looks roughly like the flow below. Not ev
 
 ```plaintext [session flow]
 1. START
-   - Open the repo. CLAUDE.md is thin (<3K), .claudeignore is real.
+   - Open the repo. CLAUDE.md is thin (<3K), .gitignore covers the noise.
    - StatusLine is visible. Green ctx, $0.
 
 2. ORIENT (Opus, plan mode)
@@ -524,6 +534,6 @@ Put this together and a single session looks roughly like the flow below. Not ev
 ```
 
 :::docs-callout{variant="success" title="If you do only three things"}
-Commit a `.claudeignore`. Put `CLAUDE.md` on a diet. Show a StatusLine. Everything else in this chapter is refinement on top of those three moves — and those three alone typically drop spend by 50–60% in the first week.
+Tighten your `.gitignore`. Put `CLAUDE.md` on a diet. Show a StatusLine. Everything else in this chapter is refinement on top of those three moves — and those three alone typically drop spend by 50–60% in the first week.
 :::
 ::::

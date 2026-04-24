@@ -11,18 +11,18 @@ tocItems:
   - { id: context-window, title: The Context Window, level: 2 }
   - { id: setup, title: Setup & Installation, level: 2 }
   - { id: claude-md, title: CLAUDE.md Deep Dive, level: 2 }
-  - { id: claudeignore, title: .claudeignore, level: 2 }
+  - { id: hiding-files, title: Hiding Files from Claude, level: 2 }
   - { id: config, title: Configuration Layers, level: 2 }
   - { id: models, title: Models, level: 2 }
   - { id: safety, title: Permissions & Safety, level: 2 }
 next: { title: Workflows, path: /workflows }
 seo:
   title: Foundations — Mental Model & Setup for Claude Code
-  description: The mindset shift, how the Claude Code harness works, the context window, setup, CLAUDE.md, .claudeignore, configuration layers, models, and permissions — everything you need before writing your first prompt.
+  description: The mindset shift, how the Claude Code harness works, the context window, setup, CLAUDE.md, file-hiding rules, configuration layers, models, and permissions — everything you need before writing your first prompt.
   keywords:
     - claude code foundations
     - claude md
-    - claudeignore
+    - permissions deny
     - context window
     - claude code setup
     - claude models
@@ -37,7 +37,7 @@ There's a cliff between people who "use Claude Code sometimes" and people who sh
 ::::docs-section{id="mental-model" title="The Mental Model Shift"}
 The single biggest gap in 2026 isn't prompt quality — it's thinking about Claude Code as a **chatbot** instead of as **infrastructure**. A chatbot is a thing you type at. A piece of infrastructure is a thing you configure, shape, and build guardrails around. Claude Code is the latter.
 
-Treat it like software you're setting up for your team. The outputs you get out are bounded by the context you put in — the `CLAUDE.md`, the `.claudeignore`, the hooks you wire into file-write events, the skills and subagents you've defined, the MCP servers you've connected. None of those exist by default. Setting them up is the job.
+Treat it like software you're setting up for your team. The outputs you get out are bounded by the context you put in — the `CLAUDE.md`, the `.gitignore` rules Claude respects, the `permissions.deny` list, the hooks you wire into file-write events, the skills and subagents you've defined, the MCP servers you've connected. None of those exist by default. Setting them up is the job.
 
 :::docs-callout{variant="tip" title="The 80%²⁰ math"}
 If Claude makes the right call 80% of the time on any single decision, and a typical feature has 20 decisions, the odds of it getting all of them right are 0.8²⁰ ≈ 1%. Anthropic's internal testing found that unguided attempts succeed about 33% of the time. Planning collapses those ambiguous decisions into a spec you've reviewed — each one lands near 100%.
@@ -48,7 +48,7 @@ If Claude makes the right call 80% of the time on any single decision, and a typ
 People obsess over prompt phrasing when the real leverage is further upstream:
 
 - Is Claude reading a 400-line `CLAUDE.md` on every turn when only 50 lines are load-bearing? That's wasted context.
-- Is it loading `node_modules` tree output because `.claudeignore` is missing? That's wasted context.
+- Is it loading `node_modules` tree output because your `.gitignore` doesn't cover it (or because you explicitly pointed at the path)? That's wasted context.
 - Is it re-reading `package.json` on every message because there's no tool memory between calls? That's wasted context.
 
 Fix those three and the prompts you were worried about start working.
@@ -206,45 +206,63 @@ There are two of these. Project `CLAUDE.md` lives in the repo root and applies o
 :::
 ::::
 
-::::docs-section{id="claudeignore" title=".claudeignore"}
-Exactly what it sounds like: `.gitignore` for Claude. Files and directories listed here are invisible to file-reading and searching tools. Without one, Claude happily reads 400MB of `node_modules` tree when you ask "what does this project use" — consuming context and slowing every command.
+::::docs-section{id="hiding-files" title="Hiding Files from Claude"}
+Claude Code has two official mechanisms for keeping files out of its reach, and knowing which to reach for saves a lot of "why can Claude see my secrets" moments.
 
-```plaintext [.claudeignore]
-# Dependencies
+**`.claudeignore` is not a real feature.** You'll see it referenced in community blog posts, npm packages, and PreToolUse-hook templates — it's a workaround people built, not something Anthropic ships. The authoritative surfaces are `.gitignore` respect and `permissions.deny`. Use those instead.
+
+### Mechanism 1 — `.gitignore` respect
+
+Claude Code respects your `.gitignore` for search-style operations. The effect: `Glob`, `Grep`, and directory listings skip anything gitignored. For most projects this covers the noise automatically — `node_modules/`, `dist/`, `.next/`, build artifacts, and log files are already gitignored, and Claude treats them as invisible to exploration tools.
+
+The win here is passive. If your repo has a sane `.gitignore`, you've already done the single biggest thing to keep Claude's searches clean. The only action item is to glance at your `.gitignore` once and make sure it covers build outputs and caches for your stack.
+
+```plaintext [.gitignore — the token-saving entries for most stacks]
 node_modules/
 vendor/
 .venv/
-
-# Build artifacts
 dist/
 build/
 .next/
 .nuxt/
 .output/
-
-# Lock files (large, rarely relevant)
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Logs and caches
-*.log
 .cache/
-
-# Environment / secrets
-.env
-.env.*
-*.pem
-*.key
-
-# Minified / generated
-*.min.js
-*.min.css
+*.log
 **/generated/
 ```
 
-:::docs-callout{variant="success" title="This is the single highest-leverage setup step"}
-For most projects, adding a thoughtful `.claudeignore` produces more context savings than any CLAUDE.md optimization. Do this on day one.
+### Mechanism 2 — `permissions.deny` for sensitive paths
+
+`.gitignore` cleans up noisy searches. It's the wrong tool for **secrets**, because an explicit `Read(./.env)` can still slip through, and because you can't always gitignore what you want to hide — a `notes/private/` folder you keep locally, a `fixtures/customer-data/` directory you scrub before commit, credentials files you intentionally track.
+
+For anything that should be strictly off-limits, use `permissions.deny` in `.claude/settings.json`:
+
+```json [.claude/settings.json]
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./notes/private/**)",
+      "Read(./fixtures/customer-data/**)",
+      "Bash(cat .env*)",
+      "Bash(cat **/id_rsa*)"
+    ]
+  }
+}
+```
+
+Two things worth noticing:
+
+- **Block the shell path too.** A clever Claude might try `cat .env` instead of `Read(./.env)`. Denying the `Bash(...)` pattern closes that backdoor.
+- **Paths are project-root relative.** `./path/**` is the convention — anchored to the project root, glob-expanded from there.
+
+### When to use which
+
+For noise you already gitignore, do nothing — `.gitignore` respect handles it. For secrets, credentials, and PII, use `permissions.deny` plus a Bash-pattern deny for the shell surface. For large committed files you don't want re-read (generated docs, fixture dumps) — gitignore them if they're truly generated; `Read`-deny them if they're committed intentionally but don't belong in context.
+
+:::docs-callout{variant="warning" title=".claudeignore looks helpful. It isn't."}
+Community tooling has produced `.claudeignore` npm packages and PreToolUse hooks that _simulate_ the behavior. They work, roughly, for some setups. But they're not reading the same rules Claude itself reads — the authoritative surface is `permissions.deny`. Pick the documented path; you'll thank yourself the first time a workaround breaks on an upgrade.
 :::
 ::::
 

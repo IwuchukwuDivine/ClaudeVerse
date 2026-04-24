@@ -48,7 +48,7 @@ export const sections: NavSection[] = [
       { title: "The Context Window", path: "/foundations#context-window" },
       { title: "Setup & Installation", path: "/foundations#setup" },
       { title: "CLAUDE.md Deep Dive", path: "/foundations#claude-md" },
-      { title: ".claudeignore", path: "/foundations#claudeignore" },
+      { title: "Hiding Files from Claude", path: "/foundations#hiding-files" },
       { title: "Configuration Layers", path: "/foundations#config" },
       { title: "Models", path: "/foundations#models" },
       { title: "Permissions & Safety", path: "/foundations#safety" },
