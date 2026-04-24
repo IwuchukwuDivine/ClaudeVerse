@@ -193,6 +193,9 @@ export default defineNuxtConfig({
       { name: "Fredoka", src: "~/assets/fonts/Fredoka-Bold.ttf", weight: 700 },
     ],
   },
+  ogImage: {
+    zeroRuntime: true,
+  },
   css: ["~/assets/css/main.css", "~/assets/css/prose.css"],
   components: true,
   ssr: true,
