@@ -1,17 +1,25 @@
 {
-  "generatedAt": "2026-04-24T18:33:17.965Z",
-  "total": 31,
+  "generatedAt": "2026-04-24T18:49:41.508Z",
+  "total": 32,
   "latestDate": "2026-04-24",
   "months": [
     {
       "id": "2026-04",
       "title": "April 2026",
       "path": "/changelog#2026-04",
-      "count": 31,
+      "count": 32,
       "latestDate": "2026-04-24"
     }
   ],
   "recent": [
+    {
+      "hash": "3751e0a",
+      "date": "2026-04-24",
+      "label": "Fix",
+      "scope": "analytics",
+      "breaking": false,
+      "summary": "Swap @vercel/analytics module for direct script injection"
+    },
     {
       "hash": "802bcf6",
       "date": "2026-04-24",
@@ -67,14 +75,6 @@
       "scope": null,
       "breaking": false,
       "summary": "Add auto-generated changelog page with commitlint enforcement"
-    },
-    {
-      "hash": "4274da8",
-      "date": "2026-04-24",
-      "label": null,
-      "scope": null,
-      "breaking": false,
-      "summary": "Add Open Graph image configuration and update dependencies"
     }
   ]
 }

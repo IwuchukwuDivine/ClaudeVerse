@@ -25,6 +25,7 @@ Welcome back. This is everything we've shipped to Claudeverse since the site wen
 
 **Apr 24, 2026**
 
+- **Fix** (analytics) — Swap @vercel/analytics module for direct script injection
 - **New** (analytics) — Integrate @vercel/analytics nuxt module
 - **Performance** (docs) — Lazy-load DocsPageNav to defer offscreen nav rendering
 - **New** (home) — Add recently shipped card to the landing page

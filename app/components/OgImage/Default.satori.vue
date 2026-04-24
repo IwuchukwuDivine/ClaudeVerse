@@ -7,7 +7,7 @@
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: '80px',
-      background: `linear-gradient(135deg, #0f172a 0%, #1e293b 55%, ${accentColor}22 100%)`,
+      background: `linear-gradient(135deg, #0f172a 0%, #1e293b 65%, ${accentColor}14 100%)`,
       color: '#f8fafc',
       fontFamily: 'Inter, system-ui, sans-serif',
       position: 'relative',
@@ -22,7 +22,7 @@
         width: '520px',
         height: '520px',
         borderRadius: '260px',
-        background: `radial-gradient(circle, ${accentColor}55 0%, transparent 70%)`,
+        background: `radial-gradient(circle, ${accentColor}30 0%, transparent 65%)`,
       }"
     />
 
