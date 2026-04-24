@@ -4,6 +4,7 @@ import {
   Coins,
   FlaskConical,
   GraduationCap,
+  History,
   House,
   Keyboard,
   LifeBuoy,
@@ -275,6 +276,18 @@ export const sections: NavSection[] = [
       { title: "File Structure", path: "/cheatsheet#files" },
       { title: "Patterns", path: "/cheatsheet#patterns" },
     ],
+  },
+  {
+    slug: "changelog",
+    title: "Changelog",
+    path: "/changelog",
+    icon: History,
+    accent: "resources",
+    tagline: "What's new",
+    description:
+      "A dated log of what's shipped on Claudeverse — new content, site features, and behind-the-scenes improvements.",
+    estReadTime: "3 min",
+    children: [{ title: "April 2026", path: "/changelog#2026-04" }],
   },
 ];
 

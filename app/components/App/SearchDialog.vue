@@ -10,7 +10,7 @@
           aria-label="Search Claudeverse"
           @mousedown.self="close"
         >
-          <div class="search-dialog__panel" @mousedown.stop>
+          <div ref="panelRef" class="search-dialog__panel" @mousedown.stop>
             <div class="search-dialog__header">
               <LucideSearch :size="18" class="search-dialog__header-icon" />
               <input
@@ -188,6 +188,7 @@
 </template>
 
 <script setup lang="ts">
+import { useFocusTrap } from "@vueuse/integrations/useFocusTrap";
 import type { SearchItem } from "~/utils/types/search";
 import highlightText from "~/utils/search/highlightText";
 
@@ -208,6 +209,18 @@ const {
 } = useSearch();
 
 const inputRef = ref<HTMLInputElement | null>(null);
+const panelRef = ref<HTMLElement | null>(null);
+
+const { activate: activateTrap, deactivate: deactivateTrap } = useFocusTrap(
+  panelRef,
+  {
+    immediate: false,
+    escapeDeactivates: false,
+    allowOutsideClick: true,
+    initialFocus: () => inputRef.value ?? false,
+    returnFocusOnDeactivate: true,
+  },
+);
 
 const highlight = highlightText;
 
@@ -221,11 +234,14 @@ const setActiveById = (id: string) => {
   if (idx >= 0) activeIndex.value = idx;
 };
 
-// Focus input on open
+// Focus input + activate focus trap on open
 watch(isOpen, async (v) => {
   if (v) {
     await nextTick();
     inputRef.value?.focus();
+    activateTrap();
+  } else {
+    deactivateTrap();
   }
 });
 
