@@ -130,6 +130,9 @@ defineProps<{ section: NavSection }>();
 .card--cheatsheet {
   --accent: var(--accent-cheatsheet);
 }
+.card--reviews {
+  --accent: var(--accent-reviews);
+}
 
 .card__header {
   display: flex;

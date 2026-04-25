@@ -171,6 +171,7 @@ const ACCENT_COLORS: Record<AccentKey, string> = {
   resources: "#a3e635",
   workshops: "#f87171",
   cheatsheet: "#22d3ee",
+  reviews: "#2dd4bf",
 };
 
 const accentColor = computed(

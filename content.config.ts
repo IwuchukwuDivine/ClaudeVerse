@@ -42,6 +42,7 @@ export default defineContentConfig({
             "resources",
             "workshops",
             "cheatsheet",
+            "reviews",
           ])
           .default("home"),
         estReadTime: z.string().optional(),
@@ -58,6 +59,20 @@ export default defineContentConfig({
             proficiencyLevel: z.string().optional(),
             timeRequired: z.string().optional(),
             ogImage: z.string().optional(),
+          })
+          .optional(),
+        review: z
+          .object({
+            subject: z.string(),
+            subjectLink: z.string().optional(),
+            category: z.string().optional(),
+            version: z.string().optional(),
+            lastTested: z.string().optional(),
+            verdict: z.string(),
+            verdictTone: z
+              .enum(["positive", "mixed", "negative"])
+              .default("mixed"),
+            tags: z.array(z.string()).default([]),
           })
           .optional(),
       }),

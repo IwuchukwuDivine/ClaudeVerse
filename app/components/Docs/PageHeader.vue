@@ -122,6 +122,9 @@ const formattedLastUpdated = computed(() => {
 .page-header--cheatsheet {
   --accent: var(--accent-cheatsheet);
 }
+.page-header--reviews {
+  --accent: var(--accent-reviews);
+}
 
 .page-header__breadcrumb {
   display: flex;

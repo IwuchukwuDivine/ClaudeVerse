@@ -250,6 +250,10 @@ const isActiveAnchor = (path: string) => {
   background: var(--accent-cheatsheet-wash);
   color: var(--accent-cheatsheet);
 }
+.sidebar__section--reviews .sidebar__icon {
+  background: var(--accent-reviews-wash);
+  color: var(--accent-reviews);
+}
 .sidebar__section-title {
   flex: 1;
 }

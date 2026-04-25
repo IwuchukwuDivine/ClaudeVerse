@@ -12,7 +12,8 @@ export type AccentKey =
   | "troubleshooting"
   | "resources"
   | "workshops"
-  | "cheatsheet";
+  | "cheatsheet"
+  | "reviews";
 
 export interface NavLink {
   title: string;
