@@ -115,8 +115,10 @@ const isActiveSection = (path: string) => {
 
 const isActiveAnchor = (path: string) => {
   const [base, hash] = path.split("#");
+  if (!hash) {
+    return base === route.path;
+  }
   if (base !== route.path) return false;
-  if (!hash) return false;
   return activeId.value === hash;
 };
 </script>
