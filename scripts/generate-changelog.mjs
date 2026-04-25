@@ -43,6 +43,36 @@ const LABELS = {
   revert: "Revert",
 };
 
+const LABEL_PRIORITY = [
+  "New",
+  "Fix",
+  "Performance",
+  "Refactor",
+  "Docs",
+  "Style",
+  "Tests",
+  "Build",
+  "CI",
+  "Chore",
+  "Revert",
+];
+
+const GROUP_HEADINGS = {
+  New: "New features",
+  Fix: "Bug fixes",
+  Performance: "Performance improvements",
+  Refactor: "Refactors",
+  Docs: "Documentation",
+  Style: "Style updates",
+  Tests: "Tests",
+  Build: "Build system",
+  CI: "CI",
+  Chore: "Chores",
+  Revert: "Reverts",
+};
+
+const CONVENTIONAL_RE = /^(\w+)(?:\(([^)]+)\))?(!)?:\s*(.+)$/;
+
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
@@ -61,7 +91,7 @@ const formatDate = (iso) => {
 };
 
 const parseSubject = (subject) => {
-  const match = subject.match(/^(\w+)(?:\(([^)]+)\))?(!)?:\s*(.+)$/);
+  const match = subject.match(CONVENTIONAL_RE);
   if (match) {
     const [, type, scope, breaking, rest] = match;
     return {
@@ -79,12 +109,21 @@ const parseSubject = (subject) => {
   };
 };
 
-const formatSubject = (subject) => {
-  const parsed = parseSubject(subject);
-  if (!parsed.label) return parsed.summary;
-  const scopePart = parsed.scope ? ` (${parsed.scope})` : "";
-  const breakPart = parsed.breaking ? " ⚠" : "";
-  return `**${parsed.label}${breakPart}**${scopePart} — ${parsed.summary}`;
+const isLabeledCommit = (subject) => {
+  const match = subject.match(CONVENTIONAL_RE);
+  return Boolean(match && LABELS[match[1].toLowerCase()]);
+};
+
+const formatScope = (scope) =>
+  scope
+    .split("-")
+    .map((part) => capitalize(part))
+    .join("-");
+
+const formatBullet = (parsed) => {
+  const breakPart = parsed.breaking ? "⚠ " : "";
+  const scopePart = parsed.scope ? `**${formatScope(parsed.scope)}** — ` : "";
+  return `${breakPart}${scopePart}${parsed.summary}`;
 };
 
 const readCommits = () => {
@@ -100,7 +139,8 @@ const readCommits = () => {
       return { hash, date, subject: rest.join("\t") };
     })
     .filter((c) => c.subject && c.subject.length >= 5)
-    .filter((c) => !SKIP.some((re) => re.test(c.subject)));
+    .filter((c) => !SKIP.some((re) => re.test(c.subject)))
+    .filter((c) => isLabeledCommit(c.subject));
 };
 
 const buildMarkdown = (commits) => {
@@ -155,11 +195,23 @@ Welcome back. This is everything we've shipped to Claudeverse since the site wen
       const dates = [...byDate.keys()].sort().reverse();
       const dateBlocks = dates
         .map((d) => {
-          const lines = byDate
-            .get(d)
-            .map((c) => `- ${formatSubject(c.subject)}`)
-            .join("\n");
-          return `**${formatDate(d)}**\n\n${lines}`;
+          const grouped = new Map();
+          for (const c of byDate.get(d)) {
+            const parsed = parseSubject(c.subject);
+            if (!grouped.has(parsed.label)) grouped.set(parsed.label, []);
+            grouped.get(parsed.label).push(parsed);
+          }
+          const groupBlocks = LABEL_PRIORITY
+            .filter((label) => grouped.has(label))
+            .map((label) => {
+              const lines = grouped
+                .get(label)
+                .map((p) => `- ${formatBullet(p)}`)
+                .join("\n");
+              return `_${GROUP_HEADINGS[label]}_\n\n${lines}`;
+            })
+            .join("\n\n");
+          return `**${formatDate(d)}**\n\n${groupBlocks}`;
         })
         .join("\n\n");
       return `::::docs-section{id="${ym}" title="${monthTitle(ym)}"}\n\n${dateBlocks}\n\n::::`;

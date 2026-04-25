@@ -1,17 +1,33 @@
 {
-  "generatedAt": "2026-04-24T18:49:41.508Z",
-  "total": 32,
+  "generatedAt": "2026-04-25T07:44:44.834Z",
+  "total": 10,
   "latestDate": "2026-04-24",
   "months": [
     {
       "id": "2026-04",
       "title": "April 2026",
       "path": "/changelog#2026-04",
-      "count": 32,
+      "count": 10,
       "latestDate": "2026-04-24"
     }
   ],
   "recent": [
+    {
+      "hash": "3325f65",
+      "date": "2026-04-24",
+      "label": "Chore",
+      "scope": null,
+      "breaking": false,
+      "summary": "Add open source community files"
+    },
+    {
+      "hash": "5166a2f",
+      "date": "2026-04-24",
+      "label": "Fix",
+      "scope": "og-image",
+      "breaking": false,
+      "summary": "Reduce accent orb opacity to prevent contrast bleed on bright accents"
+    },
     {
       "hash": "3751e0a",
       "date": "2026-04-24",
@@ -59,22 +75,6 @@
       "scope": "changelog",
       "breaking": false,
       "summary": "Emit summary json and drop prev-page link"
-    },
-    {
-      "hash": "6874d9a",
-      "date": "2026-04-24",
-      "label": "Refactor",
-      "scope": "nav",
-      "breaking": false,
-      "summary": "Move changelog out of sidebar into footer"
-    },
-    {
-      "hash": "03b37bf",
-      "date": "2026-04-24",
-      "label": "New",
-      "scope": null,
-      "breaking": false,
-      "summary": "Add auto-generated changelog page with commitlint enforcement"
     }
   ]
 }
