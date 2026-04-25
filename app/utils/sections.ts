@@ -8,6 +8,7 @@ import {
   Keyboard,
   LifeBuoy,
   Map,
+  Microscope,
   Network,
   Puzzle,
   Zap,
@@ -227,6 +228,20 @@ export const sections: NavSection[] = [
       { title: "Essential GitHub Repos", path: "/resources#repos" },
       { title: "Key Articles", path: "/resources#articles" },
       { title: "Communities", path: "/resources#communities" },
+    ],
+  },
+  {
+    slug: "reviews",
+    title: "Reviews",
+    path: "/reviews",
+    icon: Microscope,
+    accent: "reviews",
+    tagline: "Field-tested takes",
+    description:
+      "Honest, repeatable benchmarks of plugins, MCPs, orchestrators, and add-ons — methodology, numbers, and where each tool helps vs. hurts.",
+    estReadTime: "Pick one, ~5 min each",
+    children: [
+      { title: "Caveman plugin", path: "/reviews/caveman" },
     ],
   },
   {
